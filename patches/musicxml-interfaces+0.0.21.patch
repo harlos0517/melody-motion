@@ -1,0 +1,3133 @@
+diff --git a/node_modules/musicxml-interfaces/lib/index.js b/node_modules/musicxml-interfaces/lib/index.js
+index bf6db97..0882d81 100644
+--- a/node_modules/musicxml-interfaces/lib/index.js
++++ b/node_modules/musicxml-interfaces/lib/index.js
+@@ -279,6 +279,7 @@ var xmlToDoc;
+                 env: {
+                     XML_CATALOG_FILES: path_1.join(__dirname, "..", "vendor", "musicxml-dtd", "catalog.xml"),
+                 },
++                maxBuffer: 1024 * 1024 * 1024,
+             });
+             if (res.error) {
+                 throw res.error;
+@@ -295,6 +296,7 @@ var xmlToDoc;
+                 env: {
+                     XML_CATALOG_FILES: path_1.join(__dirname, "..", "vendor", "musicxml-dtd", "catalog.xml"),
+                 },
++                maxBuffer: 1024 * 1024 * 1024,
+             });
+             if (res.error) {
+                 throw res.error;
+@@ -577,8 +579,8 @@ function xmlToMeasure(node) {
+     var foundNonControlling = false;
+     var foundNumber = false;
+     var foundWidth = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "part") {
+             var dataPart = xmlToPart(ch);
+             ret.parts = ret.parts || {};
+@@ -664,8 +666,8 @@ function xmlToLyric(node) {
+     var foundColor = false;
+     var foundPrintObject = false;
+     var foundName = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "footnote") {
+             var dataFootnote = xmlToFootnote(ch);
+             ret.footnote = dataFootnote;
+@@ -1046,8 +1048,8 @@ function xmlToBeamLevel(node) {
+ }
+ function xmlToPosition(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1073,8 +1075,8 @@ function xmlToPosition(node) {
+ function xmlToPlacement(node) {
+     var ret = {};
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1091,8 +1093,8 @@ function xmlToPlacement(node) {
+ }
+ function xmlToDirectiveEntity(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1105,8 +1107,8 @@ function xmlToDirectiveEntity(node) {
+ }
+ function xmlToBezier(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1140,8 +1142,8 @@ function xmlToBezier(node) {
+ function xmlToOrientation(node) {
+     var ret = {};
+     var foundOrientation = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1160,8 +1162,8 @@ function xmlToFont(node) {
+     var ret = {};
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1388,8 +1390,8 @@ function getWholeHalfNone(node, fallbackVal) {
+ function xmlToColor(node) {
+     var ret = {};
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1409,8 +1411,8 @@ function xmlToTextDecoration(node) {
+     var foundUnderline = false;
+     var foundOverline = false;
+     var foundLineThrough = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1444,8 +1446,8 @@ function xmlToTextDecoration(node) {
+ function xmlToJustify(node) {
+     var ret = {};
+     var foundJustify = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1463,8 +1465,8 @@ function xmlToJustify(node) {
+ function xmlToHalign(node) {
+     var ret = {};
+     var foundHalign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1482,8 +1484,8 @@ function xmlToHalign(node) {
+ function xmlToValign(node) {
+     var ret = {};
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1501,8 +1503,8 @@ function xmlToValign(node) {
+ function xmlToValignImage(node) {
+     var ret = {};
+     var foundValignImage = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1520,8 +1522,8 @@ function xmlToValignImage(node) {
+ function xmlToLetterSpacing(node) {
+     var ret = {};
+     var foundLetterSpacing = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1539,8 +1541,8 @@ function xmlToLetterSpacing(node) {
+ function xmlToLineHeight(node) {
+     var ret = {};
+     var foundLineHeight = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1558,8 +1560,8 @@ function xmlToLineHeight(node) {
+ function xmlToTextDirection(node) {
+     var ret = {};
+     var foundDir = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1577,8 +1579,8 @@ function xmlToTextDirection(node) {
+ function xmlToTextRotation(node) {
+     var ret = {};
+     var foundRotation = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1596,8 +1598,8 @@ function xmlToTextRotation(node) {
+ function xmlToEnclosure(node) {
+     var ret = {};
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1617,8 +1619,8 @@ function xmlToPrintStyle(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1680,8 +1682,8 @@ function xmlToPrintStyleAlign(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1755,8 +1757,8 @@ function xmlToPrintStyleAlign(node) {
+ function xmlToLineShape(node) {
+     var ret = {};
+     var foundLineShape = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1775,8 +1777,8 @@ function xmlToDashedFormatting(node) {
+     var ret = {};
+     var foundDashLength = false;
+     var foundSpaceLength = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1802,8 +1804,8 @@ function xmlToDashedFormatting(node) {
+ function xmlToPrintObject(node) {
+     var ret = {};
+     var foundPrintObject = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1821,8 +1823,8 @@ function xmlToPrintObject(node) {
+ function xmlToPrintSpacing(node) {
+     var ret = {};
+     var foundPrintSpacing = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -1853,8 +1855,8 @@ function xmlToTextFormatting(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2002,8 +2004,8 @@ function xmlToLevelDisplay(node) {
+     var foundBracket = false;
+     var foundSize = false;
+     var foundParentheses = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2043,8 +2045,8 @@ function xmlToTrillSound(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2113,8 +2115,8 @@ function xmlToBendSound(node) {
+     var foundBeats = false;
+     var foundLastBeat = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2155,8 +2157,8 @@ function xmlToBendSound(node) {
+ }
+ function xmlToTimeOnly(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2170,8 +2172,8 @@ function xmlToTimeOnly(node) {
+ function xmlToDocumentAttributes(node) {
+     var ret = {};
+     var foundVersion_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2188,8 +2190,8 @@ function xmlToDocumentAttributes(node) {
+ }
+ function xmlToEditorial(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "footnote") {
+             var dataFootnote = xmlToFootnote(ch);
+             ret.footnote = dataFootnote;
+@@ -2206,8 +2208,8 @@ function xmlToEditorial(node) {
+ }
+ function xmlToEditorialVoice(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "voice") {
+             var dataVoice = getNumber(ch, true);
+             ret.voice = dataVoice;
+@@ -2242,8 +2244,8 @@ function xmlToFootnote(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2395,8 +2397,8 @@ function xmlToLevel(node) {
+     var foundSize = false;
+     var foundParentheses = false;
+     var foundReference = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2445,8 +2447,8 @@ function xmlToFermata(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2527,8 +2529,8 @@ function xmlToWavyLine(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2642,8 +2644,8 @@ function xmlToSegno(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2721,8 +2723,8 @@ function xmlToCoda(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2795,8 +2797,8 @@ function xmlToCoda(node) {
+ }
+ function xmlToNormalDot(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -2815,8 +2817,8 @@ function xmlToDynamics(node) {
+     var foundOverline = false;
+     var foundLineThrough = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "fp") {
+             var dataFp = true;
+             ret.fp = dataFp;
+@@ -3031,8 +3033,8 @@ function xmlToFingering(node) {
+     var foundColor = false;
+     var foundPlacement = false;
+     var foundAlternate = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3122,8 +3124,8 @@ function xmlToFret(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3171,8 +3173,8 @@ function xmlToString(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3254,8 +3256,8 @@ function xmlToDisplayText(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3417,8 +3419,8 @@ function xmlToAccidentalText(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3569,8 +3571,8 @@ function xmlToMidiDevice(node) {
+     var foundDeviceName = false;
+     var foundPort = false;
+     var foundId = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3707,8 +3709,8 @@ function xmlToMidiInstrument(node) {
+         midiChannel: null,
+         midiName: "",
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "midi-unpitched") {
+             var dataMidiUnpitched = getNumber(ch, true);
+             ret.midiUnpitched = dataMidiUnpitched;
+@@ -3759,8 +3761,8 @@ function xmlToPlay(node) {
+         semiPitched: "",
+         id: "",
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "ipa") {
+             var dataIpa = getString(ch, true);
+             ret.ipa = dataIpa;
+@@ -3792,8 +3794,8 @@ function xmlToOtherPlay(node) {
+         data: "",
+         type: "",
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -3812,8 +3814,8 @@ function xmlToScaling(node) {
+         tenths: null,
+         millimeters: null,
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tenths") {
+             var dataTenths = getNumber(ch, true);
+             ret.tenths = dataTenths;
+@@ -3856,8 +3858,8 @@ function getOddEvenBoth(node, fallbackVal) {
+ function xmlToPageMargins(node) {
+     var ret = {};
+     var foundType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "top-margin") {
+             var dataTopMargin = getNumber(ch, true);
+             ret.topMargin = dataTopMargin;
+@@ -3890,8 +3892,8 @@ function xmlToPageMargins(node) {
+ }
+ function xmlToPageLayout(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "page-height") {
+             var dataPageHeight = getNumber(ch, true);
+             ret.pageHeight = dataPageHeight;
+@@ -3912,8 +3914,8 @@ function xmlToPageLayout(node) {
+ }
+ function xmlToSystemLayout(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "system-dividers") {
+             var dataSystemDividers = xmlToSystemDividers(ch);
+             ret.systemDividers = dataSystemDividers;
+@@ -3938,8 +3940,8 @@ function xmlToSystemLayout(node) {
+ }
+ function xmlToSystemMargins(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "left-margin") {
+             var dataLeftMargin = getNumber(ch, true);
+             ret.leftMargin = dataLeftMargin;
+@@ -3956,8 +3958,8 @@ function xmlToSystemMargins(node) {
+ }
+ function xmlToSystemDividers(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "right-divider") {
+             var dataRightDivider = xmlToRightDivider(ch);
+             ret.rightDivider = dataRightDivider;
+@@ -3980,8 +3982,8 @@ function xmlToLeftDivider(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4068,8 +4070,8 @@ function xmlToRightDivider(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4151,8 +4153,8 @@ function xmlToRightDivider(node) {
+ function xmlToStaffLayout(node) {
+     var ret = {};
+     var foundNum = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "staff-distance") {
+             var dataStaffDistance = getNumber(ch, true);
+             ret.staffDistance = dataStaffDistance;
+@@ -4173,8 +4175,8 @@ function xmlToStaffLayout(node) {
+ }
+ function xmlToMeasureLayout(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "measure-distance") {
+             var dataMeasureDistance = getNumber(ch, true);
+             ret.measureDistance = dataMeasureDistance;
+@@ -4187,8 +4189,8 @@ function xmlToMeasureLayout(node) {
+ }
+ function xmlToLineWidth(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4229,8 +4231,8 @@ function getCueGraceLarge(node, fallbackVal) {
+ }
+ function xmlToNoteSize(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4246,8 +4248,8 @@ function xmlToNoteSize(node) {
+ }
+ function xmlToDistance(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4263,8 +4265,8 @@ function xmlToDistance(node) {
+ }
+ function xmlToAppearance(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "line-width") {
+             var dataLineWidths = xmlToLineWidth(ch);
+             ret.lineWidths = ret.lineWidths || {};
+@@ -4292,8 +4294,8 @@ function xmlToAppearance(node) {
+ }
+ function xmlToCreator(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4309,8 +4311,8 @@ function xmlToCreator(node) {
+ }
+ function xmlToRights(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4326,8 +4328,8 @@ function xmlToRights(node) {
+ }
+ function xmlToEncoder(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4343,8 +4345,8 @@ function xmlToEncoder(node) {
+ }
+ function xmlToRelation(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4360,8 +4362,8 @@ function xmlToRelation(node) {
+ }
+ function xmlToMiscellaneousField(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4377,8 +4379,8 @@ function xmlToMiscellaneousField(node) {
+ }
+ function xmlToMiscellaneous(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "miscellaneous-field") {
+             var dataMiscellaneousFields = xmlToMiscellaneousField(ch);
+             ret.miscellaneousFields = (ret.miscellaneousFields || []).concat(dataMiscellaneousFields);
+@@ -4391,8 +4393,8 @@ function xmlToMiscellaneous(node) {
+ }
+ function xmlToIdentification(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "miscellaneous") {
+             var dataMiscellaneous = xmlToMiscellaneous(ch);
+             ret.miscellaneous = dataMiscellaneous;
+@@ -4425,8 +4427,8 @@ function xmlToIdentification(node) {
+ }
+ function xmlToSupports(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4461,8 +4463,8 @@ function xmlToEncoding(node) {
+         encoders: [],
+         softwares: [],
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "encoding-description") {
+             var dataEncodingDescriptions = getString(ch, true);
+             ret.encodingDescriptions = (ret.encodingDescriptions || []).concat(dataEncodingDescriptions);
+@@ -4528,8 +4530,8 @@ function getSeparatorType(node, fallbackVal) {
+ function xmlToTimeSeparator(node) {
+     var ret = {};
+     var foundSeparator = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4584,8 +4586,8 @@ function getTimeSymbolType(node, fallbackVal) {
+ function xmlToTimeSymbol(node) {
+     var ret = {};
+     var foundSymbol = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4628,8 +4630,8 @@ function getCancelLocation(node, fallbackVal) {
+ function xmlToCancel(node) {
+     var ret = {};
+     var foundLocation = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4650,8 +4652,8 @@ function xmlToCancel(node) {
+ function xmlToKeyOctave(node) {
+     var ret = {};
+     var foundCancel = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -4679,8 +4681,8 @@ function xmlToKey(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPrintObject = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "cancel") {
+             var dataCancel = xmlToCancel(ch);
+             ret.cancel = dataCancel;
+@@ -4792,8 +4794,8 @@ function xmlToTime(node) {
+     var foundValign = false;
+     var foundPrintObject = false;
+     var foundNumber = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "interchangeable") {
+             var dataInterchangeable = xmlToInterchangeable(ch);
+             ret.interchangeable = dataInterchangeable;
+@@ -4917,8 +4919,8 @@ function xmlToInterchangeable(node) {
+     var ret = {};
+     var foundSymbol = false;
+     var foundSeparator = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "beats") {
+             var dataBeats = getString(ch, true);
+             ret.beats = (ret.beats || []).concat(dataBeats);
+@@ -4991,8 +4993,8 @@ function xmlToPartSymbol(node) {
+     var foundTopStaff = false;
+     var foundColor = false;
+     var foundBottomStaff = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5053,8 +5055,8 @@ function xmlToClef(node) {
+     var foundPrintObject = false;
+     var foundAfterBarline = false;
+     var foundAdditional = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "clef-octave-change") {
+             var dataClefOctaveChange = getString(ch, true);
+             ret.clefOctaveChange = dataClefOctaveChange;
+@@ -5163,8 +5165,8 @@ function xmlToClef(node) {
+ }
+ function xmlToStaffTuning(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tuning-alter") {
+             var dataTuningAlter = getString(ch, true);
+             ret.tuningAlter = dataTuningAlter;
+@@ -5214,8 +5216,8 @@ function xmlToStaffDetails(node) {
+     var foundNumber_ = false;
+     var foundPrintObject = false;
+     var foundPrintSpacing = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "staff-lines") {
+             var dataStaffLines = getNumber(ch, true);
+             ret.staffLines = dataStaffLines;
+@@ -5276,8 +5278,8 @@ function xmlToStaffDetails(node) {
+ }
+ function xmlToDouble(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5287,8 +5289,8 @@ function xmlToDouble(node) {
+ function xmlToTranspose(node) {
+     var ret = {};
+     var foundNumber_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "diatonic") {
+             var dataDiatonic = getString(ch, true);
+             ret.diatonic = dataDiatonic;
+@@ -5324,8 +5326,8 @@ function xmlToDirective(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5385,8 +5387,8 @@ function xmlToDirective(node) {
+ }
+ function xmlToSlashDot(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5396,8 +5398,8 @@ function xmlToSlashDot(node) {
+ function xmlToMultipleRest(node) {
+     var ret = {};
+     var foundUseSymbols = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5418,8 +5420,8 @@ function xmlToMultipleRest(node) {
+ function xmlToMeasureRepeat(node) {
+     var ret = {};
+     var foundSlashes = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5445,8 +5447,8 @@ function xmlToBeatRepeat(node) {
+     var ret = {};
+     var foundUseDots = false;
+     var foundSlases = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "slash-type") {
+             var dataSlashType = getString(ch, true);
+             ret.slashType = dataSlashType;
+@@ -5485,8 +5487,8 @@ function xmlToSlash(node) {
+     var ret = {};
+     var foundUseDots = false;
+     var foundUseStems = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "slash-type") {
+             var dataSlashType = getString(ch, true);
+             ret.slashType = dataSlashType;
+@@ -5527,8 +5529,8 @@ function xmlToMeasureStyle(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "measure-repeat") {
+             var dataMeasureRepeat = xmlToMeasureRepeat(ch);
+             ret.measureRepeat = dataMeasureRepeat;
+@@ -5593,8 +5595,8 @@ function xmlToMeasureStyle(node) {
+ }
+ function xmlToAttributes(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "divisions") {
+             var dataDivisions = getNumber(ch, true);
+             ret.divisions = dataDivisions;
+@@ -5656,8 +5658,8 @@ function xmlToAttributes(node) {
+ }
+ function xmlToCue(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5667,8 +5669,8 @@ function xmlToCue(node) {
+ function xmlToGrace(node) {
+     var ret = {};
+     var foundSlash = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5697,8 +5699,8 @@ function xmlToGrace(node) {
+ }
+ function xmlToChord(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5707,8 +5709,8 @@ function xmlToChord(node) {
+ }
+ function xmlToUnpitched(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "display-step") {
+             var dataDisplayStep = getString(ch, true);
+             ret.displayStep = dataDisplayStep;
+@@ -5725,8 +5727,8 @@ function xmlToUnpitched(node) {
+ }
+ function xmlToPitch(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "alter") {
+             var dataAlter = getNumber(ch, true);
+             ret.alter = dataAlter;
+@@ -5747,8 +5749,8 @@ function xmlToPitch(node) {
+ }
+ function xmlToFullNote(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "unpitched") {
+             var dataUnpitched = xmlToUnpitched(ch);
+             ret.unpitched = dataUnpitched;
+@@ -5774,8 +5776,8 @@ function xmlToFullNote(node) {
+ function xmlToRest(node) {
+     var ret = {};
+     var foundMeasure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "display-step") {
+             var dataDisplayStep = getString(ch, true);
+             ret.displayStep = dataDisplayStep;
+@@ -5800,8 +5802,8 @@ function xmlToRest(node) {
+ }
+ function xmlToTie(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5818,8 +5820,8 @@ function xmlToTie(node) {
+ }
+ function xmlToInstrument(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -5842,8 +5844,8 @@ function xmlToNote(node) {
+     var foundColor = false;
+     var foundPrintObject = false;
+     var foundPrintSpacing = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "notehead-text") {
+             var dataNoteheadText = xmlToNoteheadText(ch);
+             ret.noteheadText = dataNoteheadText;
+@@ -6135,8 +6137,8 @@ function getCount(node, fallbackVal) {
+ function xmlToType(node) {
+     var ret = {};
+     var foundSize = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6160,8 +6162,8 @@ function xmlToDot(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6395,8 +6397,8 @@ function xmlToAccidental(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundEditorial = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6496,8 +6498,8 @@ function xmlToAccidental(node) {
+ }
+ function xmlToTimeModification(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "actual-notes") {
+             var dataActualNotes = getNumber(ch, true);
+             ret.actualNotes = dataActualNotes;
+@@ -6552,8 +6554,8 @@ function getStemType(node, fallbackVal) {
+ function xmlToStem(node) {
+     var ret = {};
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6709,8 +6711,8 @@ function xmlToNotehead(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6823,8 +6825,8 @@ function xmlToBeam(node) {
+     var foundRepeater = false;
+     var foundNumber_ = false;
+     var foundFan = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -6861,8 +6863,8 @@ function xmlToBeam(node) {
+ function xmlToNotations(node) {
+     var ret = {};
+     var foundPrintObject = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "slur") {
+             var dataSlurs = xmlToSlur(ch);
+             ret.slurs = (ret.slurs || []).concat(dataSlurs);
+@@ -6949,8 +6951,8 @@ function xmlToTied(node) {
+     var foundPlacement = false;
+     var foundOrientation = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7062,8 +7064,8 @@ function xmlToSlur(node) {
+     var foundPlacement = false;
+     var foundOrientation = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7202,8 +7204,8 @@ function xmlToTuplet(node) {
+     var foundLineShape = false;
+     var foundPlacement = false;
+     var foundShowType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tuplet-normal") {
+             var dataTupletNormal = xmlToTupletNormal(ch);
+             ret.tupletNormal = dataTupletNormal;
+@@ -7284,8 +7286,8 @@ function xmlToTuplet(node) {
+ }
+ function xmlToTupletActual(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tuplet-number") {
+             var dataTupletNumber = xmlToTupletNumber(ch);
+             ret.tupletNumber = dataTupletNumber;
+@@ -7306,8 +7308,8 @@ function xmlToTupletActual(node) {
+ }
+ function xmlToTupletNormal(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tuplet-number") {
+             var dataTupletNumber = xmlToTupletNumber(ch);
+             ret.tupletNumber = dataTupletNumber;
+@@ -7331,8 +7333,8 @@ function xmlToTupletNumber(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7379,8 +7381,8 @@ function xmlToTupletType(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7427,8 +7429,8 @@ function xmlToTupletDot(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7476,8 +7478,8 @@ function xmlToGlissando(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundNumber = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7584,8 +7586,8 @@ function xmlToSlide(node) {
+     var foundLastBeat = false;
+     var foundFirstBeat = false;
+     var foundNumber = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7719,8 +7721,8 @@ function xmlToOtherNotation(node) {
+     var foundColor = false;
+     var foundPlacement = false;
+     var foundNumber = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7814,8 +7816,8 @@ function xmlToOtherDirection(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -7910,8 +7912,8 @@ function xmlToOrnaments(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "delayed-inverted-turn") {
+             var dataDelayedInvertedTurn = xmlToDelayedInvertedTurn(ch);
+             ret.delayedInvertedTurn = dataDelayedInvertedTurn;
+@@ -8099,8 +8101,8 @@ function xmlToTrillMark(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8233,8 +8235,8 @@ function xmlToTurn(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8375,8 +8377,8 @@ function xmlToDelayedTurn(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8517,8 +8519,8 @@ function xmlToInvertedTurn(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8659,8 +8661,8 @@ function xmlToDelayedInvertedTurn(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8800,8 +8802,8 @@ function xmlToVerticalTurn(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -8933,8 +8935,8 @@ function xmlToShake(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9066,8 +9068,8 @@ function xmlToMordent(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9211,8 +9213,8 @@ function xmlToInvertedMordent(node) {
+     var foundTrillStep = false;
+     var foundTwoNoteTurn = false;
+     var foundSecondBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9349,8 +9351,8 @@ function xmlToSchleifer(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9420,8 +9422,8 @@ function xmlToTremolo(node) {
+     var foundColor = false;
+     var foundPlacement = false;
+     var foundType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9501,8 +9503,8 @@ function xmlToOtherOrnament(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9578,8 +9580,8 @@ function xmlToAccidentalMark(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9647,8 +9649,8 @@ function xmlToAccidentalMark(node) {
+ }
+ function xmlToTechnical(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "triple-tongue") {
+             var dataTripleTongue = xmlToTripleTongue(ch);
+             ret.tripleTongue = dataTripleTongue;
+@@ -9757,8 +9759,8 @@ function xmlToUpBow(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9827,8 +9829,8 @@ function xmlToDownBow(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -9898,8 +9900,8 @@ function xmlToHarmonic(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "artificial") {
+             var dataArtificial = true;
+             ret.artificial = dataArtificial;
+@@ -9996,8 +9998,8 @@ function xmlToOpenString(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10066,8 +10068,8 @@ function xmlToThumbPosition(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10136,8 +10138,8 @@ function xmlToPluck(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10209,8 +10211,8 @@ function xmlToDoubleTongue(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10279,8 +10281,8 @@ function xmlToTripleTongue(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10349,8 +10351,8 @@ function xmlToStopped(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10419,8 +10421,8 @@ function xmlToSnapPizzicato(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10490,8 +10492,8 @@ function xmlToHammerOn(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10576,8 +10578,8 @@ function xmlToPullOff(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10664,8 +10666,8 @@ function xmlToBend(node) {
+     var foundBeats = false;
+     var foundLastBeat = false;
+     var foundFirstBeat = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "bend-alter") {
+             var dataBendAlter = getString(ch, true);
+             ret.bendAlter = dataBendAlter;
+@@ -10774,8 +10776,8 @@ function xmlToWithBar(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10847,8 +10849,8 @@ function xmlToTap(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -10921,8 +10923,8 @@ function xmlToHeel(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11000,8 +11002,8 @@ function xmlToToe(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11078,8 +11080,8 @@ function xmlToFingernails(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11148,8 +11150,8 @@ function xmlToHole(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "hole-closed") {
+             var dataHoleClosed = xmlToHoleClosed(ch);
+             ret.holeClosed = dataHoleClosed;
+@@ -11280,8 +11282,8 @@ function getHoleClosedType(node, fallbackVal) {
+ }
+ function xmlToHoleClosed(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11301,8 +11303,8 @@ function xmlToArrow(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "arrow-style") {
+             var dataArrowStyle = getString(ch, true);
+             ret.arrowStyle = dataArrowStyle;
+@@ -11383,8 +11385,8 @@ function xmlToHandbell(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11456,8 +11458,8 @@ function xmlToOtherTechnical(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11525,8 +11527,8 @@ function xmlToOtherTechnical(node) {
+ }
+ function xmlToArticulations(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "accent") {
+             var dataAccent = xmlToAccent(ch);
+             ret.accent = dataAccent;
+@@ -11603,8 +11605,8 @@ function xmlToAccent(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11674,8 +11676,8 @@ function xmlToStrongAccent(node) {
+     var foundColor = false;
+     var foundPlacement = false;
+     var foundType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11752,8 +11754,8 @@ function xmlToStaccato(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11822,8 +11824,8 @@ function xmlToTenuto(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11892,8 +11894,8 @@ function xmlToDetachedLegato(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -11962,8 +11964,8 @@ function xmlToStaccatissimo(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12032,8 +12034,8 @@ function xmlToSpiccato(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12106,8 +12108,8 @@ function xmlToScoop(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12212,8 +12214,8 @@ function xmlToPlop(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12318,8 +12320,8 @@ function xmlToDoit(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12424,8 +12426,8 @@ function xmlToFalloff(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12555,8 +12557,8 @@ function xmlToBreathMark(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12660,8 +12662,8 @@ function xmlToCaesura(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12730,8 +12732,8 @@ function xmlToStress(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12800,8 +12802,8 @@ function xmlToUnstress(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12870,8 +12872,8 @@ function xmlToOtherArticulation(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -12943,8 +12945,8 @@ function xmlToArpeggiate(node) {
+     var foundPlacement = false;
+     var foundColor = false;
+     var foundDirection = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13004,8 +13006,8 @@ function xmlToNonArpeggiate(node) {
+     var foundNumber_ = false;
+     var foundPlacement = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13058,8 +13060,8 @@ function xmlToNonArpeggiate(node) {
+ }
+ function xmlToLaughing(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13069,8 +13071,8 @@ function xmlToLaughing(node) {
+ }
+ function xmlToHumming(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13080,8 +13082,8 @@ function xmlToHumming(node) {
+ }
+ function xmlToEndLine(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13091,8 +13093,8 @@ function xmlToEndLine(node) {
+ }
+ function xmlToEndParagraph(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13102,8 +13104,8 @@ function xmlToEndParagraph(node) {
+ }
+ function xmlToLyricParts(node) {
+     var rarr = [];
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "extend") {
+             var data = xmlToExtend(ch);
+             rarr = (rarr || []).concat(data);
+@@ -13153,8 +13155,8 @@ function xmlToText(node) {
+     var foundRotation = false;
+     var foundLetterSpacing = false;
+     var foundDir = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13279,8 +13281,8 @@ function xmlToSyllabic(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13328,8 +13330,8 @@ function xmlToElision(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13378,8 +13380,8 @@ function xmlToExtend(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundType = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13451,8 +13453,8 @@ function xmlToFiguredBass(node) {
+     var foundPrintObject = false;
+     var foundPrintSpacing = false;
+     var foundParentheses = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "footnote") {
+             var dataFootnote = xmlToFootnote(ch);
+             ret.footnote = dataFootnote;
+@@ -13561,8 +13563,8 @@ function xmlToFigure(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "prefix") {
+             var dataPrefix = xmlToPrefix(ch);
+             ret.prefix = dataPrefix;
+@@ -13638,8 +13640,8 @@ function xmlToPrefix(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13702,8 +13704,8 @@ function xmlToFigureNumber(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13766,8 +13768,8 @@ function xmlToSuffix(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -13827,8 +13829,8 @@ function xmlToSuffix(node) {
+ }
+ function xmlToBackup(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "footnote") {
+             var dataFootnote = xmlToFootnote(ch);
+             ret.footnote = dataFootnote;
+@@ -13850,8 +13852,8 @@ function xmlToBackup(node) {
+ }
+ function xmlToForward(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "voice") {
+             var dataVoice = getNumber(ch, true);
+             ret.voice = dataVoice;
+@@ -13906,8 +13908,8 @@ function getBarlineLocation(node, fallbackVal) {
+ }
+ function xmlToBarline(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "segno") {
+             var dataSegno = xmlToSegno(ch);
+             ret.segno = dataSegno;
+@@ -14034,8 +14036,8 @@ function getBarStyleType(node, fallbackVal) {
+ function xmlToBarStyle(node) {
+     var ret = {};
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14084,8 +14086,8 @@ function xmlToEnding(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14228,8 +14230,8 @@ function getDirectionTypeBg(node, fallbackVal) {
+ function xmlToRepeat(node) {
+     var ret = {};
+     var foundWinged = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14305,8 +14307,8 @@ function getTipDirection(node, fallbackVal) {
+ function xmlToDirection(node) {
+     var ret = {};
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "voice") {
+             var dataVoice = getNumber(ch, true);
+             ret.voice = dataVoice;
+@@ -14356,8 +14358,8 @@ function xmlToDirection(node) {
+ }
+ function xmlToDirectionType(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "percussion") {
+             var dataPercussions = xmlToPercussion(ch);
+             ret.percussions = (ret.percussions || []).concat(dataPercussions);
+@@ -14468,8 +14470,8 @@ function xmlToRehearsal(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14631,8 +14633,8 @@ function xmlToWords(node) {
+     var foundLineHeight = false;
+     var foundDir = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14815,8 +14817,8 @@ function xmlToWedge(node) {
+     var foundDashLength = false;
+     var foundSpaceLength = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -14901,8 +14903,8 @@ function xmlToDashes(node) {
+     var foundDashLength = false;
+     var foundSpaceLength = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15001,8 +15003,8 @@ function xmlToBracket(node) {
+     var foundDashLength = false;
+     var foundSpaceLength = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15113,8 +15115,8 @@ function xmlToPedal(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15207,8 +15209,8 @@ function xmlToMetronome(node) {
+     var foundJustify = false;
+     var gotFirstPair = false;
+     var gotSecondPair = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "metronome-note") {
+             var dataMetronomeNotes = xmlToMetronomeNote(ch);
+             ret.metronomeNotes = (ret.metronomeNotes || []).concat(dataMetronomeNotes);
+@@ -15328,8 +15330,8 @@ function xmlToMetronome(node) {
+ }
+ function xmlToBeatUnitDot(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15340,8 +15342,8 @@ function xmlToPerMinute(node) {
+     var ret = {};
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15377,8 +15379,8 @@ function xmlToPerMinute(node) {
+ }
+ function xmlToMetronomeNote(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "metronome-dot") {
+             var dataMetronomeDots = xmlToMetronomeDot(ch);
+             ret.metronomeDots = (ret.metronomeDots || []).concat(dataMetronomeDots);
+@@ -15403,8 +15405,8 @@ function xmlToMetronomeNote(node) {
+ }
+ function xmlToMetronomeDot(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15414,8 +15416,8 @@ function xmlToMetronomeDot(node) {
+ function xmlToMetronomeBeam(node) {
+     var ret = {};
+     var foundNumber_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15437,8 +15439,8 @@ function xmlToMetronomeTuplet(node) {
+     var ret = {};
+     var foundBracket = false;
+     var foundShowNumber = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "actual-notes") {
+             var dataActualNotes = getNumber(ch, true);
+             ret.actualNotes = dataActualNotes;
+@@ -15518,8 +15520,8 @@ function xmlToOctaveShift(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15613,8 +15615,8 @@ function xmlToHarpPedals(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "pedal-tuning") {
+             var dataPedalTunings = xmlToPedalTuning(ch);
+             ret.pedalTunings = (ret.pedalTunings || []).concat(dataPedalTunings);
+@@ -15691,8 +15693,8 @@ function xmlToHarpPedals(node) {
+ }
+ function xmlToPedalTuning(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "pedal-step") {
+             var dataPedalStep = getString(ch, true);
+             ret.pedalStep = dataPedalStep;
+@@ -15714,8 +15716,8 @@ function xmlToDamp(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15793,8 +15795,8 @@ function xmlToDampAll(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15872,8 +15874,8 @@ function xmlToEyeglasses(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -15951,8 +15953,8 @@ function xmlToStringMute(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16029,8 +16031,8 @@ function xmlToStringMute(node) {
+ }
+ function xmlToScordatura(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "accord") {
+             var dataAccords = xmlToAccord(ch);
+             ret.accords = (ret.accords || []).concat(dataAccords);
+@@ -16043,8 +16045,8 @@ function xmlToScordatura(node) {
+ }
+ function xmlToAccord(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "tuning-alter") {
+             var dataTuningAlter = getString(ch, true);
+             ret.tuningAlter = dataTuningAlter;
+@@ -16071,8 +16073,8 @@ function xmlToImage(node) {
+     var ret = {};
+     var foundHalign = false;
+     var foundValignImage = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16155,8 +16157,8 @@ function xmlToPrincipalVoice(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16245,8 +16247,8 @@ function xmlToAccordionRegistration(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "accordion-middle") {
+             var dataAccordionMiddle = getString(ch, true);
+             ret.accordionMiddle = dataAccordionMiddle;
+@@ -16337,8 +16339,8 @@ function xmlToPercussion(node) {
+     var foundHalign = false;
+     var foundValign = false;
+     var foundEnclosure = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "stick-location") {
+             var dataStickLocation = getString(ch, true);
+             ret.stickLocation = dataStickLocation;
+@@ -16463,8 +16465,8 @@ function xmlToPercussion(node) {
+ }
+ function xmlToTimpani(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16473,8 +16475,8 @@ function xmlToTimpani(node) {
+ }
+ function xmlToBeater(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16490,8 +16492,8 @@ function xmlToBeater(node) {
+ }
+ function xmlToStick(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "stick-material") {
+             var dataStickMaterial = getString(ch, true);
+             ret.stickMaterial = dataStickMaterial;
+@@ -16513,8 +16515,8 @@ function xmlToStick(node) {
+ function xmlToOffset(node) {
+     var ret = {};
+     var foundSound = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16541,8 +16543,8 @@ function xmlToHarmonyChord(node) {
+         inversion: null,
+         bass: null,
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "root") {
+             var dataRoot = xmlToRoot(ch);
+             ret.root = dataRoot;
+@@ -16617,8 +16619,8 @@ function xmlToHarmony(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundPlacement = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "frame") {
+             var dataFrame = xmlToFrame(ch);
+             ret.frame = dataFrame;
+@@ -16744,8 +16746,8 @@ function xmlToHarmony(node) {
+ }
+ function xmlToRoot(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "root-step") {
+             var dataRootStep = xmlToRootStep(ch);
+             ret.rootStep = dataRootStep;
+@@ -16765,8 +16767,8 @@ function xmlToRootStep(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16834,8 +16836,8 @@ function xmlToRootAlter(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16910,8 +16912,8 @@ function xmlToFunction(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -16976,8 +16978,8 @@ function xmlToKind(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17076,8 +17078,8 @@ function xmlToInversion(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17137,8 +17139,8 @@ function xmlToInversion(node) {
+ }
+ function xmlToBass(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "bass-step") {
+             var dataBassStep = xmlToBassStep(ch);
+             ret.bassStep = dataBassStep;
+@@ -17158,8 +17160,8 @@ function xmlToBassStep(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17227,8 +17229,8 @@ function xmlToBassAlter(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17301,8 +17303,8 @@ function xmlToBassAlter(node) {
+ function xmlToDegree(node) {
+     var ret = {};
+     var foundPrintObject = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "degree-alter") {
+             var dataDegreeAlter = xmlToDegreeAlter(ch);
+             ret.degreeAlter = dataDegreeAlter;
+@@ -17367,8 +17369,8 @@ function xmlToDegreeValue(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17439,8 +17441,8 @@ function xmlToDegreeAlter(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17507,8 +17509,8 @@ function xmlToDegreeType(node) {
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17575,8 +17577,8 @@ function xmlToFrame(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValignImage = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "frame-strings") {
+             var dataFrameStrings = getString(ch, true);
+             ret.frameStrings = dataFrameStrings;
+@@ -17653,8 +17655,8 @@ function xmlToFrame(node) {
+ }
+ function xmlToFirstFret(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17674,8 +17676,8 @@ function xmlToFirstFret(node) {
+ }
+ function xmlToFrameNote(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "barre") {
+             var dataBarre = xmlToBarre(ch);
+             ret.barre = dataBarre;
+@@ -17701,8 +17703,8 @@ function xmlToFrameNote(node) {
+ function xmlToBarre(node) {
+     var ret = {};
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17724,8 +17726,8 @@ function xmlToBarre(node) {
+ function xmlToGrouping(node) {
+     var ret = {};
+     var foundNumber_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "feature") {
+             var dataFeatures = xmlToFeature(ch);
+             ret.features = (ret.features || []).concat(dataFeatures);
+@@ -17755,8 +17757,8 @@ function xmlToGrouping(node) {
+ }
+ function xmlToFeature(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17772,8 +17774,8 @@ function xmlToFeature(node) {
+ }
+ function xmlToPrint(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "measure-numbering") {
+             var dataMeasureNumbering = xmlToMeasureNumbering(ch);
+             ret.measureNumbering = dataMeasureNumbering;
+@@ -17836,8 +17838,8 @@ function xmlToMeasureNumbering(node) {
+     var foundColor = false;
+     var foundHalign = false;
+     var foundValign = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -17913,8 +17915,8 @@ function xmlToMeasureNumbering(node) {
+ }
+ function xmlToSound(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "midi-instrument") {
+             var dataMidiInstruments = xmlToMidiInstrument(ch);
+             ret.midiInstruments = (ret.midiInstruments || []).concat(dataMidiInstruments);
+@@ -18008,8 +18010,8 @@ function xmlToSound(node) {
+ }
+ function xmlToWork(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "work-number") {
+             var dataWorkNumber = getString(ch, true);
+             ret.workNumber = dataWorkNumber;
+@@ -18030,8 +18032,8 @@ function xmlToWork(node) {
+ }
+ function xmlToOpus(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18040,8 +18042,8 @@ function xmlToOpus(node) {
+ }
+ function xmlToDefaults(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "word-font") {
+             var dataWordFont = xmlToWordFont(ch);
+             ret.wordFont = dataWordFont;
+@@ -18088,8 +18090,8 @@ function xmlToMusicFont(node) {
+     var ret = {};
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18124,8 +18126,8 @@ function xmlToWordFont(node) {
+     var ret = {};
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18160,8 +18162,8 @@ function xmlToLyricFont(node) {
+     var ret = {};
+     var foundFontWeight = false;
+     var foundFontStyle = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18202,8 +18204,8 @@ function xmlToLyricFont(node) {
+ }
+ function xmlToLyricLanguage(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18222,8 +18224,8 @@ function xmlToCredit(node) {
+     var ret = {};
+     ret.creditWords = [];
+     var foundCreditTypes = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "credit-type") {
+             var dataCreditTypes = getString(ch, true);
+             ret.creditTypes = (ret.creditTypes || []).concat(dataCreditTypes);
+@@ -18271,8 +18273,8 @@ function xmlToCreditWords(node) {
+     var foundRelativeY = false;
+     var foundDefaultX = false;
+     var foundDefaultY = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18442,8 +18444,8 @@ function xmlToCreditImage(node) {
+     var ret = {};
+     var foundHalign = false;
+     var foundValignImage = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18492,8 +18494,8 @@ function xmlToCreditImage(node) {
+ }
+ function xmlToPartList(node) {
+     var ret = [];
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "score-part") {
+             var dataScoreParts = xmlToScorePart(ch);
+             ret.push(dataScoreParts);
+@@ -18522,8 +18524,8 @@ function xmlToScorePart(node) {
+         midiInstruments: [],
+         id: "",
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "identification") {
+             var dataIdentification = xmlToIdentification(ch);
+             ret.identification = dataIdentification;
+@@ -18585,8 +18587,8 @@ function xmlToPartName(node) {
+     var foundColor = false;
+     var foundPrintObject = false;
+     var foundJustify = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18667,8 +18669,8 @@ function xmlToPartAbbreviation(node) {
+     var foundColor = false;
+     var foundPrintObject = false;
+     var foundJustify = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18747,8 +18749,8 @@ function xmlToPartGroup(node) {
+         _class: "PartGroup",
+     };
+     var foundNumber_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "group-name-display") {
+             var dataGroupNameDisplay = xmlToGroupNameDisplay(ch);
+             ret.groupNameDisplay = dataGroupNameDisplay;
+@@ -18809,8 +18811,8 @@ function xmlToGroupName(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundJustify = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18882,8 +18884,8 @@ function xmlToGroupAbbreviation(node) {
+     var foundFontStyle = false;
+     var foundColor = false;
+     var foundJustify = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18953,8 +18955,8 @@ function xmlToGroupSymbol(node) {
+     var ret = {};
+     var foundData = false;
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -18994,8 +18996,8 @@ function xmlToGroupSymbol(node) {
+ function xmlToGroupBarline(node) {
+     var ret = {};
+     var foundColor = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -19015,8 +19017,8 @@ function xmlToGroupBarline(node) {
+ }
+ function xmlToGroupTime(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -19033,8 +19035,8 @@ function xmlToScoreInstrument(node) {
+         solo: null,
+         id: "",
+     };
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "instrument-name") {
+             var dataInstrumentName = getString(ch, true);
+             ret.instrumentName = dataInstrumentName;
+@@ -19071,8 +19073,8 @@ function xmlToScoreInstrument(node) {
+ }
+ function xmlToSolo(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+     }
+     for (var i = 0; i < node.attributes.length; ++i) {
+         var ch2 = node.attributes[i];
+@@ -19081,8 +19083,8 @@ function xmlToSolo(node) {
+ }
+ function xmlToVirtualInstrument(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "virtual-library") {
+             var dataVirtualLibrary = getString(ch, true);
+             ret.virtualLibrary = dataVirtualLibrary;
+@@ -19099,8 +19101,8 @@ function xmlToVirtualInstrument(node) {
+ }
+ function xmlToScoreHeader(node) {
+     var ret = {};
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "movement-title") {
+             var dataMovementTitle = getString(ch, true);
+             ret.movementTitle = dataMovementTitle;
+@@ -19138,8 +19140,8 @@ function xmlToScoreHeader(node) {
+ function xmlToScoreTimewise(node) {
+     var ret = {};
+     var foundVersion_ = false;
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "measure") {
+             var dataMeasures = xmlToMeasure(ch);
+             ret.measures = (ret.measures || []).concat(dataMeasures);
+@@ -19188,8 +19190,8 @@ function xmlToScoreTimewise(node) {
+ }
+ function xmlToPart(node) {
+     var rarr = [];
+-    for (var i = 0; i < node.children.length; ++i) {
+-        var ch = node.children[i];
++    for (var i = 0; i < node.childNodes.length; ++i) {
++        var ch = node.childNodes[i];
+         if (ch.nodeName === "note") {
+             var data = xmlToNote(ch);
+             rarr = (rarr || []).concat(data);

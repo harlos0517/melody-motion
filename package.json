@@ -1,0 +1,36 @@
+{
+  "name": "melody-motion",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Generates video from musicXML",
+  "main": "/src/index.ts",
+  "author": "Harlos",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "postinstall": "patch-package",
+    "start": "tsx src/index.ts",
+    "type": "tsx src/spec-crawler.ts"
+  },
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.2.0",
+    "@types/node": "^20.12.13",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.4.5",
+    "fluent-ffmpeg": "^2.1.3",
+    "json-schema-to-typescript": "^14.0.4",
+    "musicxml-interfaces": "^0.0.21",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
+    "svgdom": "^0.1.19",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/svgdom": "^0.1.2",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-eqeqeq-fix": "^1.0.3"
+  }
+}
