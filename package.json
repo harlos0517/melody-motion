@@ -10,7 +10,9 @@
   "scripts": {
     "postinstall": "patch-package",
     "start": "tsx src/index.ts",
-    "type": "tsx src/spec-crawler.ts"
+    "type": "tsx src/spec-crawler.ts",
+    "parse": "tsx src/musicxml-parser.ts",
+    "svg": "tsx src/music-svg.ts"
   },
   "dependencies": {
     "@svgdotjs/svg.js": "^3.2.0",
@@ -24,10 +26,12 @@
     "postinstall-postinstall": "^2.1.0",
     "svgdom": "^0.1.19",
     "tsx": "^4.11.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/svgdom": "^0.1.2",
+    "@types/xml2js": "^0.4.14",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "eslint": "^8.57.0",

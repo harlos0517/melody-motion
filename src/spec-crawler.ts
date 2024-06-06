@@ -3,7 +3,7 @@ import fs from 'fs'
 import cheerio, { AnyNode, Cheerio } from 'cheerio'
 import dotenv from 'dotenv'
 import { JSONSchema4, JSONSchema4TypeName } from 'json-schema'
-import { compile } from 'json-schema-to-typescript'
+import { Options, compile } from 'json-schema-to-typescript'
 
 type Element = {
   name: string
@@ -109,7 +109,7 @@ const toCamel = (str: string) => str.replace(/[-_:]([a-z])/g, g => g[1].toUpperC
 const wrapSentence = (str = '', len = 80) =>
   str.replace(new RegExp(`(.{1,${len}})(\\s+|$)`, 'g'), '$1\n').slice(0, -1)
 
-const compileConfig = {
+const compileConfig: Partial<Options> = {
   declareExternallyReferenced: false,
   bannerComment: '',
 }
@@ -125,35 +125,52 @@ const typeDefs = await Promise.all(elements.map(async element => {
     description: `${link}\n\n${wrapSentence(docs)}`,
     additionalProperties: false,
   }
-  if (!schema.properties || !schema.definitions) throw new Error('No properties or definitions')
+  if (!schema.properties || !schema.definitions || !Array.isArray(schema.required))
+    throw new Error('No properties or definitions or required array found')
   for (const [kebab, { type, docs, required }] of Object.entries(attributes)) {
     const attrName = toCamel(kebab)
-    if (!schema.properties || !schema.definitions) continue
-    schema.properties[attrName] = { type: 'string', description: wrapSentence(docs) }
-    if (required && Array.isArray(schema.required)) schema.required.push(attrName)
+    if (required) schema.required.push(attrName)
     if (!SCHEMA_TYPES.includes(type)) {
-      schema.properties[attrName] = { '$ref': `#/definitions/${type}-value` }
+      schema.properties[attrName] =
+        {
+          type: 'array',
+          description: wrapSentence(docs),
+          items: { oneOf: [{ '$ref': `#/definitions/${type}-value` }] },
+        }
       schema.definitions[`${type}-value`] = { type: 'object' }
-    } else schema.properties[attrName] = { type: type as JSONSchema4TypeName }
+    } else {
+      schema.properties[attrName] = {
+        type: 'array',
+        description: wrapSentence(docs),
+        oneOf: [{ type: type as JSONSchema4TypeName }],
+      }
+    }
   }
   if (array) {
     for (const kebab of content as string[]) {
       const type = toCamel(kebab)
       schema.properties[type] = {
         type: 'array',
-        items: { '$ref': `#/definitions/${type}` },
+        items: { oneOf: [{ '$ref': `#/definitions/${type}` }] },
+        description: `{@link ${toCamel(`-${kebab}`)}}`,
       }
       schema.definitions[type] = { type: 'object' }
     }
   } else if (content !== 'empty') {
     const typeName = content as string
     if (!SCHEMA_TYPES.includes(typeName)) {
-      schema.properties.v = { '$ref': `#/definitions/${content}-value` }
+      schema.properties.v = {
+        oneOf: [{ '$ref': `#/definitions/${typeName}-value` }],
+        description: `{@link ${toCamel(`-${typeName}-value`)}`,
+      }
       schema.definitions[`${typeName}-value`] = { type: 'object' }
     } else schema.properties.v = { type: content as JSONSchema4TypeName }
+    schema.required.push('v')
   }
 
-  return await compile(schema, toCamel(schema.title || 'Element'), compileConfig)
+  const result = await compile(schema, toCamel(schema.title || 'Element'), compileConfig)
+
+  return result.replace(/(\s?\S+:\s*[a-z]+)(\d+)(\[?\]?;)/gi, '$1$3')
 }))
 
 
@@ -201,3 +218,5 @@ const dataTypeDefs = await Promise.all(dataTypes.children('li').map(async(i, li)
 const defs = [...typeDefs, ...dataTypeDefs]
 const schema = '/* eslint-disable max-len */\n\n' + defs.join('\n\n').replace(/;\n/g, '\n')
 fs.writeFileSync('data/schema.ts', schema)
+
+fs.writeFileSync('data/elements.txt', elements.map(e => e.name).join('\n'))
