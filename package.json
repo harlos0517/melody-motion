@@ -9,10 +9,10 @@
   "private": false,
   "scripts": {
     "postinstall": "patch-package",
-    "start": "tsx src/index.ts",
-    "type": "tsx src/spec-crawler.ts",
+    "spec": "tsx src/spec-crawler.ts",
     "parse": "tsx src/musicxml-parser.ts",
-    "svg": "tsx src/music-svg.ts"
+    "svg": "tsx src/music-svg.ts",
+    "animation": "tsx src/test-animation.ts"
   },
   "dependencies": {
     "@svgdotjs/svg.js": "^3.2.0",
@@ -21,15 +21,18 @@
     "dotenv": "^16.4.5",
     "fluent-ffmpeg": "^2.1.3",
     "json-schema-to-typescript": "^14.0.4",
+    "minimist": "^1.2.8",
     "musicxml-interfaces": "^0.0.21",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
+    "sharp": "^0.32.6",
     "svgdom": "^0.1.19",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@types/minimist": "^1.2.5",
     "@types/svgdom": "^0.1.2",
     "@types/xml2js": "^0.4.14",
     "@typescript-eslint/eslint-plugin": "^7.11.0",

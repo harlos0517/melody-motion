@@ -75,7 +75,7 @@ export interface CreditImage {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -114,6 +114,11 @@ export interface CreditImage {
  * &lt;direction&gt;. However, since the &lt;credit&gt; is not part of a measure,
  * the default-x and default-y attributes adjust the origin relative to the bottom
  * left-hand corner of the page. The enclosure is none if not specified.
+ *
+ * By default, a series of &lt;credit-words&gt; and &lt;credit-symbol&gt; elements
+ * within a single &lt;credit&gt; element follow one another in sequence visually.
+ * Non-positional formatting attributes are carried over from the previous element
+ * by default.
  */
 export interface CreditSymbol {
   /**
@@ -211,7 +216,7 @@ export interface CreditSymbol {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -236,7 +241,7 @@ export interface CreditSymbol {
    */
   valign?: ValignValue[]
   /**
-   * {@link SmuflGlyphNameValue
+   * {@link SmuflGlyphNameValue}
    */
   v: SmuflGlyphNameValue
 }
@@ -245,6 +250,15 @@ export interface CreditSymbol {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/credit-type
  *
+ *
+ *
+ * The &lt;credit-type&gt; element indicates the purpose behind a credit. Multiple
+ * types of data may be combined in a single credit, so multiple elements may be
+ * used. Standard values include:
+ *
+ * <li>page
+ * number</li><li>title</li><li>subtitle</li><li>composer</li><li>arranger</li><li>lyricist</li><li>rights</li><li>part
+ * name</li>
  *
  */
 export interface CreditType {
@@ -259,6 +273,11 @@ export interface CreditType {
  * &lt;direction&gt;. However, since the &lt;credit&gt; is not part of a measure,
  * the default-x and default-y attributes adjust the origin relative to the bottom
  * left-hand corner of the page. The enclosure is none if not specified.
+ *
+ * By default, a series of &lt;credit-words&gt; and &lt;credit-symbol&gt; elements
+ * within a single &lt;credit&gt; element follow one another in sequence visually.
+ * Non-positional formatting attributes are carried over from the previous element
+ * by default.
  */
 export interface CreditWords {
   /**
@@ -356,7 +375,7 @@ export interface CreditWords {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -451,7 +470,7 @@ export interface Link {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -513,6 +532,11 @@ export interface Link {
  * attributes adjust the origin relative to the bottom left-hand corner of the
  * page. The enclosure for &lt;credit-words&gt; and &lt;credit-symbol&gt; is none
  * if not specified.
+ *
+ * By default, a series of &lt;credit-words&gt; and &lt;credit-symbol&gt; elements
+ * within a single &lt;credit&gt; element follow one another in sequence visually.
+ * Non-positional formatting attributes are carried over from the previous element
+ * by default.
  */
 export interface Credit {
   /**
@@ -566,7 +590,7 @@ export interface Distance {
    */
   type: DistanceTypeValue[]
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -580,6 +604,12 @@ export interface Distance {
  * identical. The type attribute specifies what type of glyph is being defined. The
  * element value specifies what SMuFL canonical glyph name to use, including
  * recommended stylistic alternates.
+ *
+ * The SMuFL canonical glyph name should match the type. For instance, a type of
+ * quarter-rest would use values restQuarter, restQuarterOld, or restQuarterZ. A
+ * type of g-clef-ottava-bassa would use values gClef8vb, gClef8vbOld, or
+ * gClef8vbCClef. A type of octave-shift-up-8 would use values ottava, ottavaBassa,
+ * ottavaBassaBa, ottavaBassaVb, or octaveBassa.
  */
 export interface Glyph {
   /**
@@ -587,7 +617,7 @@ export interface Glyph {
    */
   type: GlyphTypeValue[]
   /**
-   * {@link SmuflGlyphNameValue
+   * {@link SmuflGlyphNameValue}
    */
   v: SmuflGlyphNameValue
 }
@@ -605,7 +635,7 @@ export interface LineWidth {
    */
   type: LineWidthTypeValue[]
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -625,7 +655,7 @@ export interface NoteSize {
    */
   type: NoteSizeTypeValue[]
   /**
-   * {@link NonNegativeDecimalValue
+   * {@link NonNegativeDecimalValue}
    */
   v: NonNegativeDecimalValue
 }
@@ -686,6 +716,12 @@ export interface Appearance {
  * The presence of a &lt;concert-score&gt; element indicates that a score is
  * displayed in concert pitch. It is used for scores that contain parts for
  * transposing instruments.
+ *
+ * A document with a &lt;concert-score&gt; element may not contain any
+ * &lt;transpose&gt; elements that have non-zero values for either the
+ * &lt;diatonic&gt; or &lt;chromatic&gt; elements. Concert scores may include
+ * octave transpositions, so &lt;transpose&gt; elements with a &lt;double&gt;
+ * element or a non-zero &lt;octave-change&gt; element value are permitted.
  */
 export interface ConcertScore {}
 
@@ -783,7 +819,7 @@ export interface MusicFont {
  */
 export interface PageHeight {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -796,7 +832,7 @@ export interface PageHeight {
  */
 export interface BottomMargin {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -810,7 +846,7 @@ export interface BottomMargin {
  */
 export interface LeftMargin {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -824,7 +860,7 @@ export interface LeftMargin {
  */
 export interface RightMargin {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -837,7 +873,7 @@ export interface RightMargin {
  */
 export interface TopMargin {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -882,7 +918,7 @@ export interface PageMargins {
  */
 export interface PageWidth {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -895,6 +931,12 @@ export interface PageWidth {
  * &lt;print&gt; element. If no &lt;page-layout&gt; element is present in the
  * &lt;defaults&gt; element, default page layout values are chosen by the
  * application.
+ *
+ * When used in the &lt;print&gt; element, the &lt;page-layout&gt; element affects
+ * the appearance of the current page only. All other pages use the default values
+ * as determined by the &lt;defaults&gt; element. If any child elements are missing
+ * from the &lt;page-layout&gt; element in a &lt;print&gt; element, the values
+ * determined by the &lt;defaults&gt; element are used there as well.
  */
 export interface PageLayout {
   /**
@@ -921,7 +963,7 @@ export interface PageLayout {
  */
 export interface Millimeters {
   /**
-   * {@link MillimetersValue
+   * {@link MillimetersValue}
    */
   v: MillimetersValue
 }
@@ -937,7 +979,7 @@ export interface Millimeters {
  */
 export interface Tenths {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -975,7 +1017,7 @@ export interface Scaling {
  */
 export interface StaffDistance {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -987,6 +1029,10 @@ export interface StaffDistance {
  * The &lt;staff-layout&gt; element includes the vertical distance from the bottom
  * line of the previous staff in this system to the top line of the staff specified
  * by the number attribute.
+ *
+ * When used in the &lt;defaults&gt; element, the values apply to all systems in
+ * all parts. When used in the &lt;print&gt; element, the values apply to the
+ * current system only. This value is ignored for the first staff in a system.
  */
 export interface StaffLayout {
   /**
@@ -1010,7 +1056,7 @@ export interface StaffLayout {
  */
 export interface SystemDistance {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -1022,6 +1068,10 @@ export interface SystemDistance {
  * The &lt;left-divider&gt; element indicates the presence or absence of a system
  * divider (also known as a system separation mark) displayed on the left side of
  * the page.
+ *
+ * The default vertical position is half the &lt;system-distance&gt; value from the
+ * top of the system that is below the divider. The default horizontal position is
+ * the left system margin.
  */
 export interface LeftDivider {
   /**
@@ -1032,7 +1082,7 @@ export interface LeftDivider {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -1081,7 +1131,7 @@ export interface LeftDivider {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -1107,6 +1157,10 @@ export interface LeftDivider {
  * The &lt;right-divider&gt; element indicates the presence or absence of a system
  * divider (also known as a system separation mark) displayed on the right side of
  * the page.
+ *
+ * The default vertical position is half the &lt;system-distance&gt; value from the
+ * top of the system that is below the divider. The default horizontal position is
+ * the right system margin.
  */
 export interface RightDivider {
   /**
@@ -1117,7 +1171,7 @@ export interface RightDivider {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -1166,7 +1220,7 @@ export interface RightDivider {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -1195,6 +1249,10 @@ export interface RightDivider {
  * dividers (also known as system separation marks) between systems displayed on
  * the same page. Dividers on the left and right side of the page are controlled by
  * the &lt;left-divider&gt; and &lt;right-divider&gt; elements respectively.
+ *
+ * When used in the &lt;print&gt; element, the &lt;system-dividers&gt; element
+ * affects the dividers that would appear between the current system and the
+ * previous system.
  */
 export interface SystemDividers {
   /**
@@ -1235,7 +1293,7 @@ export interface SystemMargins {
  */
 export interface TopSystemDistance {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -1247,6 +1305,25 @@ export interface TopSystemDistance {
  * A system is a group of staves that are read and played simultaneously. The
  * &lt;system-layout&gt; element includes left and right margins and the vertical
  * distance from the previous system.
+ *
+ * Sometimes the sum of measure widths in a system may not equal the system width
+ * specified by the layout elements due to roundoff or other errors. The behavior
+ * when reading MusicXML files in these cases is application-dependent. For
+ * instance, applications may find that the system layout data is more reliable
+ * than the sum of the measure widths, and adjust the measure widths accordingly.
+ *
+ * When used in the &lt;defaults&gt; element, the &lt;system-layout&gt; element
+ * defines a default appearance for all systems in the score. If no
+ * &lt;system-layout&gt; element is present in the &lt;defaults&gt; element,
+ * default system layout values are chosen by the application.
+ *
+ * When used in the &lt;print&gt; element, the &lt;system-layout&gt; element
+ * affects the appearance of the current system only. All other systems use the
+ * default values as determined by the &lt;defaults&gt; element. If any child
+ * elements are missing from the &lt;system-layout&gt; element in a &lt;print&gt;
+ * element, the values determined by the &lt;defaults&gt; element are used there as
+ * well. This type of &lt;system-layout&gt; element need only be read from or
+ * written to the first visible part in the score.
  */
 export interface SystemLayout {
   /**
@@ -1392,7 +1469,7 @@ export interface Encoder {
  */
 export interface EncodingDate {
   /**
-   * {@link YyyyMmDdValue
+   * {@link YyyyMmDdValue}
    */
   v: YyyyMmDdValue
 }
@@ -1547,7 +1624,7 @@ export interface Relation {
 export interface Rights {
   /**
    * Standard type values are music, words, and arrangement, but other types may be
-   * used. This attribute is only needed when there are multiple &lt;rights&gt
+   * used. This attribute is only needed when there are multiple &lt;rights&gt;
    * elements.
    */
   type?: TokenValue[]
@@ -1573,7 +1650,7 @@ export interface Source {
  *
  * The &lt;Identification&gt; element contains basic metadata about the score. It
  * includes information that may apply at a score-wide, movement-wide, or part-wide
- * level. The &lt;creator&gt;, &lt;rights&gt;, &lt;source&gt;, and &lt;relation&gt
+ * level. The &lt;creator&gt;, &lt;rights&gt;, &lt;source&gt;, and &lt;relation&gt;
  * elements are based on <a
  * href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">Dublin
  * Core</a>.
@@ -1650,7 +1727,7 @@ export interface ClefOctaveChange {
  */
 export interface Line {
   /**
-   * {@link StaffLinePositionValue
+   * {@link StaffLinePositionValue}
    */
   v: StaffLinePositionValue
 }
@@ -1663,7 +1740,7 @@ export interface Line {
  */
 export interface Sign {
   /**
-   * {@link ClefSignValue
+   * {@link ClefSignValue}
    */
   v: ClefSignValue
 }
@@ -1674,6 +1751,9 @@ export interface Sign {
  *
  * Clefs are represented by a combination of &lt;sign&gt;, &lt;line&gt;, and
  * &lt;clef-octave-change&gt; elements.
+ *
+ * Clefs appear at the start of each system unless the print-object attribute has
+ * been set to "no" or the additional attribute has been set to "yes".
  */
 export interface Clef {
   /**
@@ -1698,7 +1778,7 @@ export interface Clef {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -1744,7 +1824,7 @@ export interface Clef {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -1826,7 +1906,7 @@ export interface Directive {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -1855,10 +1935,15 @@ export interface Directive {
  * to indicate a note's duration. For example, if duration = 1 and divisions = 2,
  * this is an eighth note duration. Duration and divisions are used directly for
  * generating sound output, so they must be chosen to take tuplets into account.
+ *
+ * Using a &lt;divisions&gt; element lets us use just one number to represent a
+ * duration for each note in the score, while retaining the full power of a
+ * fractional representation. If maximum compatibility with Standard MIDI 1.0 files
+ * is important, do not have the divisions value exceed 16383.
  */
 export interface Divisions {
   /**
-   * {@link PositiveDivisionsValue
+   * {@link PositiveDivisionsValue}
    */
   v: PositiveDivisionsValue
 }
@@ -1963,7 +2048,7 @@ export interface Footnote {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -2005,6 +2090,10 @@ export interface Footnote {
  *
  * The &lt;part-clef&gt; element is used for transpositions from concert scores
  * that also include a change of clef, as for instruments such as bass clarinet.
+ *
+ * The child elements of the &lt;part-clef&gt; element have the same meaning as for
+ * the &lt;clef&gt; element. However that meaning applies to a transposed part
+ * created from the existing score file.
  */
 export interface PartClef {
   /**
@@ -2032,7 +2121,7 @@ export interface PartClef {
  */
 export interface Chromatic {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -2088,6 +2177,10 @@ export interface OctaveChange {
  * The child elements of the &lt;part-transpose&gt; element have the same meaning
  * as for the &lt;transpose&gt; element. However that meaning applies to a
  * transposed part created from the existing score file.
+ *
+ * The &lt;chromatic&gt; element in a &lt;part-transpose&gt; element will usually
+ * have a non-zero value, since octave transpositions can be represented in concert
+ * scores using the &lt;transpose&gt; element.
  */
 export interface PartTranspose {
   /**
@@ -2114,7 +2207,7 @@ export interface PartTranspose {
  *
  * The &lt;for-part&gt; element is used in a concert score to indicate the
  * transposition for a transposed part created from that score. It is only used in
- * score files that contain a &lt;concert-score&gt; element in the &lt;defaults&gt
+ * score files that contain a &lt;concert-score&gt; element in the &lt;defaults&gt;
  * element. This allows concert scores with transposed parts to be represented in a
  * single uncompressed MusicXML file.
  */
@@ -2149,7 +2242,7 @@ export interface ForPart {
  */
 export interface Instruments {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -2173,7 +2266,7 @@ export interface Cancel {
    */
   location?: CancelLocationValue[]
   /**
-   * {@link FifthsValue
+   * {@link FifthsValue}
    */
   v: FifthsValue
 }
@@ -2189,7 +2282,7 @@ export interface Cancel {
  */
 export interface Fifths {
   /**
-   * {@link FifthsValue
+   * {@link FifthsValue}
    */
   v: FifthsValue
 }
@@ -2200,7 +2293,7 @@ export interface Fifths {
  *
  * Non-traditional key signatures are represented using a list of altered tones.
  * The &lt;key-accidental&gt; element indicates the accidental to be displayed in
- * the key signature, represented in the same manner as the &lt;accidental&gt
+ * the key signature, represented in the same manner as the &lt;accidental&gt;
  * element. It is used for disambiguating microtonal accidentals. The different
  * element names indicate the different meaning of altering notes in a scale versus
  * altering a sounding pitch.
@@ -2212,7 +2305,7 @@ export interface KeyAccidental {
    */
   smufl?: SmuflAccidentalGlyphNameValue[]
   /**
-   * {@link AccidentalValueValue
+   * {@link AccidentalValueValue}
    */
   v: AccidentalValueValue
 }
@@ -2229,7 +2322,7 @@ export interface KeyAccidental {
  */
 export interface KeyAlter {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -2256,7 +2349,7 @@ export interface KeyOctave {
    */
   cancel?: YesNoValue[]
   /**
-   * {@link OctaveValue
+   * {@link OctaveValue}
    */
   v: OctaveValue
 }
@@ -2273,7 +2366,7 @@ export interface KeyOctave {
  */
 export interface KeyStep {
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -2288,7 +2381,7 @@ export interface KeyStep {
  */
 export interface Mode {
   /**
-   * {@link ModeValue
+   * {@link ModeValue}
    */
   v: ModeValue
 }
@@ -2310,7 +2403,7 @@ export interface Key {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -2356,7 +2449,7 @@ export interface Key {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -2469,7 +2562,7 @@ export interface SlashDot {}
  */
 export interface SlashType {
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -2480,6 +2573,17 @@ export interface SlashType {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/beat-repeat.png">
+ *
+ * The &lt;beat-repeat&gt; element is used to indicate that a single beat (but
+ * possibly many notes) is repeated.
+ *
+ * The stop type indicates the first beat where the repeats are no longer
+ * displayed. Both the start and stop of the beats being repeated should be
+ * specified unless the repeats are displayed through the end of the part.
+ *
+ * The &lt;beat-repeat&gt; element specifies a notation style for repetitions. The
+ * actual music being repeated needs to be repeated within the MusicXML file. This
+ * element specifies the notation that indicates the repeat.
  */
 export interface BeatRepeat {
   /**
@@ -2517,6 +2621,18 @@ export interface BeatRepeat {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/measure-repeat.png">
+ *
+ * The &lt;measure-repeat&gt; element is used for both single and multiple measure
+ * repeats. The text of the element indicates the number of measures to be repeated
+ * in a single pattern. The text of the element is ignored when the type is stop.
+ *
+ * The stop type indicates the first measure where the repeats are no longer
+ * displayed. Both the start and the stop of the measures being repeated should be
+ * specified unless the repeats are displayed through the end of the part.
+ *
+ * The &lt;measure-repeat&gt; element specifies a notation style for repetitions.
+ * The actual music being repeated needs to be repeated within each measure of the
+ * MusicXML file. This element specifies the notation that indicates the repeat.
  */
 export interface MeasureRepeat {
   /**
@@ -2530,7 +2646,7 @@ export interface MeasureRepeat {
    */
   slashes?: PositiveIntegerValue[]
   /**
-   * {@link PositiveIntegerOrEmptyValue
+   * {@link PositiveIntegerOrEmptyValue}
    */
   v: PositiveIntegerOrEmptyValue
 }
@@ -2541,6 +2657,10 @@ export interface MeasureRepeat {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/multiple-rest.png">
+ *
+ * The &lt;multiple-rest&gt; element indicates multiple rests that span several
+ * measures. The element text indicates the number of measures in the multiple
+ * rest.
  */
 export interface MultipleRest {
   /**
@@ -2549,7 +2669,7 @@ export interface MultipleRest {
    */
   useSymbols?: YesNoValue[]
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -2559,6 +2679,12 @@ export interface MultipleRest {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/slash
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/slash.png">
+ *
+ * The &lt;slash&gt; element indicates that slash notation is to be used.
+ *
+ * The stop type indicates the first beat where slash notation no longer displayed.
+ * Both the start and stop of the slash notation should be specified unless the
+ * slashes are displayed through the end of the part.
  */
 export interface Slash {
   /**
@@ -2599,6 +2725,12 @@ export interface Slash {
  * multiple measures within a part. This includes multiple rests over several
  * measures, repeats of beats, single, or multiple measures, and use of slash
  * notation.
+ *
+ * The &lt;multiple-rest&gt; and &lt;measure-repeat&gt; elements indicate the
+ * number of measures covered in the element content. The &lt;beat-repeat&gt; and
+ * &lt;slash&gt; elements can cover partial measures. All but the multiple-rest
+ * element use a type attribute to indicate starting and stopping the use of the
+ * style.
  */
 export interface MeasureStyle {
   /**
@@ -2654,6 +2786,14 @@ export interface MeasureStyle {
  *
  * The &lt;part-symbol&gt; element indicates how a symbol for a multi-staff part is
  * indicated in the score; brace is the default value.
+ *
+ * The top-staff and bottom-staff attributes are used when the brace does not
+ * extend across the entire part. For example, in a 3-staff organ part, the
+ * top-staff will typically be 1 for the right hand, while the bottom-staff will
+ * typically be 2 for the left hand. Staff 3 for the pedals is usually outside the
+ * brace. By default, the presence of a &lt;part-symbol&gt; element that does not
+ * extend across the entire part also indicates a corresponding change in the
+ * common barlines within a part.
  */
 export interface PartSymbol {
   /**
@@ -2669,7 +2809,7 @@ export interface PartSymbol {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -2686,7 +2826,7 @@ export interface PartSymbol {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -2704,7 +2844,7 @@ export interface PartSymbol {
    */
   topStaff?: StaffNumberValue[]
   /**
-   * {@link GroupSymbolValueValue
+   * {@link GroupSymbolValueValue}
    */
   v: GroupSymbolValueValue
 }
@@ -2719,7 +2859,7 @@ export interface PartSymbol {
  */
 export interface Capo {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -2730,6 +2870,14 @@ export interface Capo {
  *
  * If the &lt;staff-lines&gt; element is present, the appearance of each line may
  * be individually specified with a &lt;line-detail&gt; element.
+ *
+ * The print-object attribute allows lines to be hidden within a staff. This is
+ * used in special situations such as a widely-spaced percussion staff where a note
+ * placed below the higher line is distinct from a note placed above the lower
+ * line. Hidden staff lines are included when specifying clef lines and determining
+ * &lt;display-step&gt; / &lt;display-octave&gt; values, but are not counted as
+ * lines for the purposes of the &lt;system-layout&gt; and &lt;staff-layout&gt;
+ * elements.
  */
 export interface LineDetail {
   /**
@@ -2760,12 +2908,12 @@ export interface LineDetail {
  *
  * The &lt;staff-lines&gt; element specifies the number of lines and is usually
  * used for a non 5-line staff. If the &lt;staff-lines&gt; element is present, the
- * appearance of each line may be individually specified with a &lt;line-detail&gt
+ * appearance of each line may be individually specified with a &lt;line-detail&gt;
  * element.
  */
 export interface StaffLines {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -2781,6 +2929,11 @@ export interface StaffLines {
  * &lt;staff-size&gt; of less than 100, but the exact value is
  * implementation-dependent unless specified here. Staff size affects staff height
  * only, not the relationship of the staff to the left and right margins.
+ *
+ * In some cases, a &lt;staff-size&gt; different than 100 also scales the notation
+ * on the staff, such as with a cue staff. In other cases, such as percussion
+ * staves, the lines may be more widely spaced without scaling the notation on the
+ * staff. The scaling attribute allows these two cases to be distinguished.
  */
 export interface StaffSize {
   /**
@@ -2789,7 +2942,7 @@ export interface StaffSize {
    */
   scaling?: NonNegativeDecimalValue[]
   /**
-   * {@link NonNegativeDecimalValue
+   * {@link NonNegativeDecimalValue}
    */
   v: NonNegativeDecimalValue
 }
@@ -2803,7 +2956,7 @@ export interface StaffSize {
  */
 export interface TuningAlter {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -2812,13 +2965,13 @@ export interface TuningAlter {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuning-octave
  *
- * The &lt;tuning-octave&gt; element is represented like the &lt;octave&gt
+ * The &lt;tuning-octave&gt; element is represented like the &lt;octave&gt;
  * element, with a different name to reflect its different function in string
  * tuning.
  */
 export interface TuningOctave {
   /**
-   * {@link OctaveValue
+   * {@link OctaveValue}
    */
   v: OctaveValue
 }
@@ -2832,7 +2985,7 @@ export interface TuningOctave {
  */
 export interface TuningStep {
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -2843,6 +2996,9 @@ export interface TuningStep {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/staff-tuning.png">
+ *
+ * The &lt;staff-tuning&gt; element specifies the open, non-capo tuning of the
+ * lines on a tablature staff.
  */
 export interface StaffTuning {
   /**
@@ -2872,7 +3028,7 @@ export interface StaffTuning {
  */
 export interface StaffType {
   /**
-   * {@link StaffTypeValue
+   * {@link StaffTypeValue}
    */
   v: StaffTypeValue
 }
@@ -2941,7 +3097,7 @@ export interface StaffDetails {
  */
 export interface Staves {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -2982,7 +3138,7 @@ export interface Beats {
  */
 export interface TimeRelation {
   /**
-   * {@link TimeRelationValue
+   * {@link TimeRelationValue}
    */
   v: TimeRelationValue
 }
@@ -3037,6 +3193,16 @@ export interface SenzaMisura {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/time.png">
+ *
+ * Time signatures are represented by the &lt;beats&gt; element for the numerator
+ * and the &lt;beat-type&gt; element for the denominator. Multiple pairs of
+ * &lt;beat&gt; and &lt;beat-type&gt; elements are used for composite time
+ * signatures with multiple denominators, such as 2/4 + 3/8. A composite such as
+ * 3+2/8 requires only one &lt;beat&gt;/&lt;beat-type&gt; pair.
+ *
+ * The print-object attribute allows a time signature to be specified but not
+ * printed, as is the case for excerpts from the middle of a score. The value is
+ * "yes" if not present.
  */
 export interface Time {
   /**
@@ -3047,7 +3213,7 @@ export interface Time {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3105,7 +3271,7 @@ export interface Time {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3192,6 +3358,11 @@ export interface Transpose {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/attributes
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/attributes.png">
+ *
+ * The &lt;attributes&gt; element contains musical information that typically
+ * changes on measure boundaries. This includes key and time signatures, clefs,
+ * transpositions, and staving. When attributes are changed mid-measure, it affects
+ * the music in score order, not in MusicXML document order.
  */
 export interface Attributes {
   /**
@@ -3256,15 +3427,19 @@ export interface Attributes {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/duration
  *
- * Duration is a positive number specified in division units. The &lt;duration&gt
+ * Duration is a positive number specified in division units. The &lt;duration&gt;
  * element represents the intended duration vs. the notated duration (for instance,
  * differences in dotted notes in Baroque-era music). Differences in duration
  * specific to an interpretation or performance should be represented using the
  * &lt;note&gt; element's attack and release attributes.
+ *
+ * The &lt;duration&gt; element moves the musical position when used in
+ * &lt;backup&gt; elements, &lt;forward&gt; elements, and &lt;note&gt; elements
+ * that do not contain a &lt;chord&gt; child element.
  */
 export interface Duration {
   /**
-   * {@link PositiveDivisionsValue
+   * {@link PositiveDivisionsValue}
    */
   v: PositiveDivisionsValue
 }
@@ -3276,7 +3451,7 @@ export interface Duration {
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/backup.png"><br>The
  * &lt;backup&gt; and &lt;forward&gt; elements are required to coordinate multiple
- * voices in one part, including music on multiple staves. The &lt;backup&gt
+ * voices in one part, including music on multiple staves. The &lt;backup&gt;
  * element is generally used to move between voices and staves. Thus it does not
  * include &lt;voice&gt; or &lt;staff&gt; elements. Duration values should always
  * be positive, and should not cross measure boundaries or mid-measure changes in
@@ -3302,6 +3477,8 @@ export interface Backup {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bar-style
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/bar-style.png">
+ *
+ * The &lt;bar-style&gt; element contains barline style and color information.
  */
 export interface BarStyle {
   /**
@@ -3309,7 +3486,7 @@ export interface BarStyle {
    */
   color?: ColorValue[]
   /**
-   * {@link BarStyleValue
+   * {@link BarStyleValue}
    */
   v: BarStyleValue
 }
@@ -3319,6 +3496,9 @@ export interface BarStyle {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/coda
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/coda.png">
+ *
+ * The &lt;coda&gt; element is the visual indicator of a coda sign. A &lt;sound&gt;
+ * element is also needed to guide playback applications reliably.
  */
 export interface Coda {
   /**
@@ -3329,7 +3509,7 @@ export interface Coda {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3378,7 +3558,7 @@ export interface Coda {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3407,6 +3587,10 @@ export interface Coda {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ending
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ending.png">
+ *
+ * The &lt;ending&gt; element represents multiple (e.g. first and second) endings.
+ * The element text is used when the text displayed in the ending is different than
+ * what appears in the number attribute.
  */
 export interface Ending {
   /**
@@ -3434,7 +3618,7 @@ export interface Ending {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3475,7 +3659,7 @@ export interface Ending {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3510,6 +3694,9 @@ export interface Ending {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fermata
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/fermata.png">
+ *
+ * The &lt;fermata&gt; element content represents the shape of the fermata sign. An
+ * empty &lt;fermata&gt; element represents a normal fermata.
  */
 export interface Fermata {
   /**
@@ -3520,7 +3707,7 @@ export interface Fermata {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3557,7 +3744,7 @@ export interface Fermata {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3575,7 +3762,7 @@ export interface Fermata {
    */
   type?: UprightInvertedValue[]
   /**
-   * {@link FermataShapeValue
+   * {@link FermataShapeValue}
    */
   v: FermataShapeValue
 }
@@ -3585,6 +3772,8 @@ export interface Fermata {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/repeat
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/repeat.png">
+ *
+ * The &lt;repeat&gt; element represents repeat marks.
  */
 export interface Repeat {
   /**
@@ -3614,6 +3803,9 @@ export interface Repeat {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/segno
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/segno.png">
+ *
+ * The &lt;segno&gt; element is the visual indicator of a segno sign. A
+ * &lt;sound&gt; element is also needed to guide playback applications reliably.
  */
 export interface Segno {
   /**
@@ -3624,7 +3816,7 @@ export interface Segno {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3673,7 +3865,7 @@ export interface Segno {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3727,7 +3919,7 @@ export interface WavyLine {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -3758,7 +3950,7 @@ export interface WavyLine {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -3804,6 +3996,15 @@ export interface WavyLine {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/barline
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/barline.png">
+ *
+ * If a barline is other than a normal single barline, it should be represented by
+ * a &lt;barline&gt; element that describes it. This includes information about
+ * repeats and multiple endings, as well as line style. Barline data is on the same
+ * level as the other musical data in a score - a child of a measure in a partwise
+ * score, or a part in a timewise score. This allows for barlines within measures,
+ * as in dotted barlines that subdivide measures in complex meters. The two
+ * &lt;fermata&gt; elements allow for fermatas on both sides of the barline (the
+ * lower one inverted).
  */
 export interface Barline {
   /**
@@ -3902,7 +4103,7 @@ export interface AccordionLow {}
  */
 export interface AccordionMiddle {
   /**
-   * {@link AccordionMiddleValue
+   * {@link AccordionMiddleValue}
    */
   v: AccordionMiddleValue
 }
@@ -3914,7 +4115,7 @@ export interface AccordionMiddle {
  * The &lt;accordion-registration&gt; element is used for accordion registration
  * symbols. These are circular symbols divided horizontally into high, middle, and
  * low sections that correspond to 4', 8', and 16' pipes. Each
- * &lt;accordion-high&gt;, &lt;accordion-middle&gt;, and &lt;accordion-low&gt
+ * &lt;accordion-high&gt;, &lt;accordion-middle&gt;, and &lt;accordion-low&gt;
  * element represents the presence of one or more dots in the registration diagram.
  * An &lt;accordion-registration&gt; element needs to have at least one of the
  * child elements present.
@@ -3977,7 +4178,7 @@ export interface AccordionRegistration {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4073,7 +4274,7 @@ export interface Bracket {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4097,6 +4298,8 @@ export interface Bracket {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/damp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/damp.png">
+ *
+ * The &lt;damp&gt; element specifies a harp damping mark.
  */
 export interface Damp {
   /**
@@ -4156,7 +4359,7 @@ export interface Damp {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4180,6 +4383,8 @@ export interface Damp {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/damp-all
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/damp-all.png">
+ *
+ * The &lt;damp-all&gt; element specifies a harp damping mark for all strings.
  */
 export interface DampAll {
   /**
@@ -4239,7 +4444,7 @@ export interface DampAll {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4263,6 +4468,9 @@ export interface DampAll {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dashes
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/dashes.png">
+ *
+ * The &lt;dashes&gt; element represents dashes, used for instance with cresc. and
+ * dim. marks.
  */
 export interface Dashes {
   /**
@@ -4306,7 +4514,7 @@ export interface Dashes {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4329,6 +4537,8 @@ export interface Dashes {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/f
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/f.png">
+ *
+ * The &lt;f&gt; element represents a forte dynamic marking.
  */
 export interface F {}
 
@@ -4337,6 +4547,8 @@ export interface F {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ff.png">
+ *
+ * The &lt;ff&gt; element represents a fortissimo dynamic marking.
  */
 export interface Ff {}
 
@@ -4345,6 +4557,8 @@ export interface Ff {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/fff.png">
+ *
+ * The &lt;fff&gt; element represents a triple forte dynamic marking.
  */
 export interface Fff {}
 
@@ -4353,6 +4567,8 @@ export interface Fff {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ffff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ffff.png">
+ *
+ * The &lt;ffff&gt; element represents an ffff dynamic marking.
  */
 export interface Ffff {}
 
@@ -4361,6 +4577,8 @@ export interface Ffff {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fffff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/fffff.png">
+ *
+ * The &lt;fffff&gt; element represents an fffff dynamic marking.
  */
 export interface Fffff {}
 
@@ -4369,6 +4587,8 @@ export interface Fffff {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ffffff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ffffff.png">
+ *
+ * The &lt;ffffff&gt; element represents an ffffff dynamic marking.
  */
 export interface Ffffff {}
 
@@ -4377,6 +4597,8 @@ export interface Ffffff {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/fp.png">
+ *
+ * The &lt;fp&gt; element represents a forte piano dynamic marking.
  */
 export interface Fp {}
 
@@ -4385,6 +4607,8 @@ export interface Fp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/fz
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/fz.png">
+ *
+ * The &lt;fz&gt; element represents a forzando fz dynamic marking.
  */
 export interface Fz {}
 
@@ -4393,6 +4617,8 @@ export interface Fz {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mf
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/mf.png">
+ *
+ * The &lt;mf&gt; element represents a mezzo forte dynamic marking.
  */
 export interface Mf {}
 
@@ -4401,6 +4627,8 @@ export interface Mf {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/mp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/mp.png">
+ *
+ * The &lt;mp&gt; element represents a mezzo piano dynamic marking.
  */
 export interface Mp {}
 
@@ -4409,6 +4637,8 @@ export interface Mp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/n
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/n.png">
+ *
+ * The &lt;n&gt; element represents a niente dynamic marking.
  */
 export interface N {}
 
@@ -4434,6 +4664,8 @@ export interface OtherDynamics {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/p
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/p.png">
+ *
+ * The &lt;p&gt; element represents a piano dynamic marking.
  */
 export interface P {}
 
@@ -4442,6 +4674,8 @@ export interface P {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pf
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/pf.png">
+ *
+ * The &lt;pf&gt; element represents a piano forte dynamic marking.
  */
 export interface Pf {}
 
@@ -4450,6 +4684,8 @@ export interface Pf {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/pp.png">
+ *
+ * The &lt;pp&gt; element represents a pianissimo dynamic marking.
  */
 export interface Pp {}
 
@@ -4458,6 +4694,8 @@ export interface Pp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ppp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ppp.png">
+ *
+ * The &lt;ppp&gt; element represents a triple piano dynamic marking.
  */
 export interface Ppp {}
 
@@ -4466,6 +4704,8 @@ export interface Ppp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pppp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/pppp.png">
+ *
+ * The &lt;pppp&gt; element represents a pppp dynamic marking.
  */
 export interface Pppp {}
 
@@ -4474,6 +4714,8 @@ export interface Pppp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/ppppp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/ppppp.png">
+ *
+ * The &lt;ppppp&gt; element represents a ppppp dynamic marking.
  */
 export interface Ppppp {}
 
@@ -4482,6 +4724,8 @@ export interface Ppppp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/pppppp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/pppppp.png">
+ *
+ * The &lt;pppppp&gt; element represents a pppppp dynamic marking.
  */
 export interface Pppppp {}
 
@@ -4490,6 +4734,8 @@ export interface Pppppp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rf
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/rf.png">
+ *
+ * The &lt;rf&gt; element represents a rinforzando rf dynamic marking.
  */
 export interface Rf {}
 
@@ -4498,6 +4744,8 @@ export interface Rf {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rfz
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/rfz.png">
+ *
+ * The &lt;rfz&gt; element represents a rinforzando rfz dynamic marking.
  */
 export interface Rfz {}
 
@@ -4506,6 +4754,8 @@ export interface Rfz {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sf
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sf.png">
+ *
+ * The &lt;sf&gt; element represents a sforzando sf dynamic marking.
  */
 export interface Sf {}
 
@@ -4514,6 +4764,8 @@ export interface Sf {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sffz
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sffz.png">
+ *
+ * The &lt;sffz&gt; element represents a sforzando sffz dynamic marking.
  */
 export interface Sffz {}
 
@@ -4522,6 +4774,8 @@ export interface Sffz {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sfp.png">
+ *
+ * The &lt;sfp&gt; element represents a sforzando piano sfp dynamic marking.
  */
 export interface Sfp {}
 
@@ -4530,6 +4784,8 @@ export interface Sfp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfpp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sfpp.png">
+ *
+ * The &lt;sfpp&gt; element represents a sforzando pianissimo sfpp dynamic marking.
  */
 export interface Sfpp {}
 
@@ -4538,6 +4794,8 @@ export interface Sfpp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfz
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sfz.png">
+ *
+ * The &lt;sfz&gt; element represents a sforzando sfz dynamic marking.
  */
 export interface Sfz {}
 
@@ -4546,6 +4804,8 @@ export interface Sfz {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sfzp
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/sfzp.png">
+ *
+ * The &lt;sfzp&gt; element represents a sforzando piano sfzp dynamic marking.
  */
 export interface Sfzp {}
 
@@ -4554,6 +4814,25 @@ export interface Sfzp {}
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/dynamics
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/dynamics.png">
+ *
+ * Dynamics can be associated either with a note or a general musical direction. To
+ * avoid inconsistencies between and amongst the letter abbreviations for dynamics
+ * (what is sf vs. sfz, standing alone or with a trailing dynamic that is not
+ * always piano), we use the actual letters as the names of these dynamic elements.
+ * The &lt;other-dynamics&gt; element allows other dynamic marks that are not
+ * covered here. Dynamics elements may also be combined to create marks not covered
+ * by a single element, such as &lt;sf/&gt;&lt;mp/&gt;.
+ *
+ * These letter dynamic symbols are separated from crescendo, decrescendo, and
+ * wedge indications. Dynamic representation is inconsistent in scores. Many things
+ * are assumed by the composer and left out, such as returns to original dynamics.
+ * The MusicXML format captures what is in the score, but does not try to be
+ * optimal for analysis or synthesis of dynamics.
+ *
+ * The placement attribute is used when the dynamics are associated with a
+ * &lt;note&gt;. It is ignored when the dynamics are associated with a
+ * &lt;direction&gt;. In that case the &lt;direction&gt; element's placement
+ * attribute is used instead.
  */
 export interface Dynamics {
   /**
@@ -4564,7 +4843,7 @@ export interface Dynamics {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -4630,7 +4909,7 @@ export interface Dynamics {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4828,7 +5107,7 @@ export interface Eyeglasses {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -4856,7 +5135,7 @@ export interface Eyeglasses {
  */
 export interface PedalAlter {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -4869,7 +5148,7 @@ export interface PedalAlter {
  */
 export interface PedalStep {
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -4961,7 +5240,7 @@ export interface HarpPedals {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5004,7 +5283,7 @@ export interface Image {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -5036,7 +5315,7 @@ export interface Image {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5070,7 +5349,7 @@ export interface Image {
  */
 export interface BeatUnit {
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -5131,7 +5410,7 @@ export interface MetronomeBeam {
    */
   number?: BeamLevelValue[]
   /**
-   * {@link BeamValueValue
+   * {@link BeamValueValue}
    */
   v: BeamValueValue
 }
@@ -5170,7 +5449,7 @@ export interface MetronomeTied {
  */
 export interface ActualNotes {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -5192,7 +5471,7 @@ export interface NormalDot {}
  */
 export interface NormalNotes {
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -5208,7 +5487,7 @@ export interface NormalNotes {
  */
 export interface NormalType {
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -5254,7 +5533,7 @@ export interface MetronomeTuplet {
  */
 export interface MetronomeType {
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -5339,12 +5618,12 @@ export interface PerMinute {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/metronome
  *
  * The &lt;metronome&gt; element represents metronome marks and other metric
- * relationships. The &lt;beat-unit&gt; element group and &lt;per-minute&gt
+ * relationships. The &lt;beat-unit&gt; element group and &lt;per-minute&gt;
  * element specify regular metronome marks. The &lt;metronome-note&gt; and
  * &lt;metronome-relation&gt; elements allow for the specification of metric
  * modulations and other metric relationships, such as swing tempo marks where two
  * eighths are equated to a quarter note / eighth note triplet. Tied notes can be
- * represented in both types of metronome marks by using the &lt;beat-unit-tied&gt
+ * represented in both types of metronome marks by using the &lt;beat-unit-tied&gt;
  * and &lt;metronome-tied&gt; elements. The print-object attribute is set to no in
  * cases where the &lt;metronome&gt; element represents a relationship or range
  * that is not displayed in the music notation.
@@ -5423,7 +5702,7 @@ export interface Metronome {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5542,7 +5821,7 @@ export interface OctaveShift {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5570,7 +5849,7 @@ export interface OctaveShift {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-direction
  *
- * The &lt;other-direction&gt; element is used to define any &lt;direction&gt
+ * The &lt;other-direction&gt; element is used to define any &lt;direction&gt;
  * symbols not yet in the MusicXML format. The smufl attribute can be used to
  * specify a particular direction symbol, allowing application interoperability
  * without requiring every SMuFL glyph to have a MusicXML element equivalent. Using
@@ -5639,7 +5918,7 @@ export interface OtherDirection {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5682,7 +5961,7 @@ export interface Pedal {
    */
   type: PedalTypeValue[]
   /**
-   * Used only when the sign attribute is yes and the type is start or sostenuto
+   * Used only when the sign attribute is yes and the type is start or sostenuto;
    * otherwise it is ignored. If yes, the short P and S signs are used. If no, the
    * full Ped and Sost signs are used. It is no if not specified.
    */
@@ -5740,7 +6019,7 @@ export interface Pedal {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -5776,7 +6055,7 @@ export interface Beater {
    */
   tip?: TipDirectionValue[]
   /**
-   * {@link BeaterValueValue
+   * {@link BeaterValueValue}
    */
   v: BeaterValueValue
 }
@@ -5796,7 +6075,7 @@ export interface Effect {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link EffectValueValue
+   * {@link EffectValueValue}
    */
   v: EffectValueValue
 }
@@ -5816,7 +6095,7 @@ export interface Glass {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link GlassValueValue
+   * {@link GlassValueValue}
    */
   v: GlassValueValue
 }
@@ -5836,7 +6115,7 @@ export interface Membrane {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link MembraneValueValue
+   * {@link MembraneValueValue}
    */
   v: MembraneValueValue
 }
@@ -5855,7 +6134,7 @@ export interface Metal {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link MetalValueValue
+   * {@link MetalValueValue}
    */
   v: MetalValueValue
 }
@@ -5894,7 +6173,7 @@ export interface Pitched {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link PitchedValueValue
+   * {@link PitchedValueValue}
    */
   v: PitchedValueValue
 }
@@ -5908,7 +6187,7 @@ export interface Pitched {
  */
 export interface StickMaterial {
   /**
-   * {@link StickMaterialValue
+   * {@link StickMaterialValue}
    */
   v: StickMaterialValue
 }
@@ -5922,7 +6201,7 @@ export interface StickMaterial {
  */
 export interface StickType {
   /**
-   * {@link StickTypeValue
+   * {@link StickTypeValue}
    */
   v: StickTypeValue
 }
@@ -5971,7 +6250,7 @@ export interface Stick {
  */
 export interface StickLocation {
   /**
-   * {@link StickLocationValue
+   * {@link StickLocationValue}
    */
   v: StickLocationValue
 }
@@ -6005,7 +6284,7 @@ export interface Wood {
    */
   smufl?: SmuflPictogramGlyphNameValue[]
   /**
-   * {@link WoodValueValue
+   * {@link WoodValueValue}
    */
   v: WoodValueValue
 }
@@ -6084,7 +6363,7 @@ export interface Percussion {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6224,7 +6503,7 @@ export interface PrincipalVoice {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6356,7 +6635,7 @@ export interface Rehearsal {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6448,6 +6727,11 @@ export interface Scordatura {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/staff-divide.png">
+ *
+ * The &lt;staff-divide&gt; element represents the staff division arrow symbols
+ * found in the Standard Music Font Layout (SMuFL) <a
+ * href="https://www.w3.org/2021/03/smufl14/tables/staff-brackets-and-dividers.html">Staff
+ * brackets and dividers</a> range at code points U+E00B, U+E00C, and U+E00D.
  */
 export interface StaffDivide {
   /**
@@ -6511,7 +6795,7 @@ export interface StaffDivide {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6600,7 +6884,7 @@ export interface StringMute {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6638,7 +6922,7 @@ export interface SymbolType {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -6731,7 +7015,7 @@ export interface SymbolType {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6759,7 +7043,7 @@ export interface SymbolType {
    */
   valign?: ValignValue[]
   /**
-   * {@link SmuflGlyphNameValue
+   * {@link SmuflGlyphNameValue}
    */
   v: SmuflGlyphNameValue
 }
@@ -6827,7 +7111,7 @@ export interface Wedge {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -6961,7 +7245,7 @@ export interface Words {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -7133,7 +7417,7 @@ export interface Offset {
    */
   sound?: YesNoValue[]
   /**
-   * {@link DivisionsValue
+   * {@link DivisionsValue}
    */
   v: DivisionsValue
 }
@@ -7201,6 +7485,15 @@ export interface Sync {
  * that change the state of the listening application from the specified point in
  * the performance onward. If multiple child elements of the same type are present,
  * they should have distinct player and/or time-only attributes.
+ *
+ * The &lt;offset&gt; element is used to indicate that the listening change takes
+ * place offset from the current score position. If the &lt;listening&gt; element
+ * is a child of a &lt;direction&gt; element, the listening &lt;offset&gt; element
+ * overrides the direction &lt;offset&gt; element if both elements are present.
+ *
+ * Note that the &lt;offset&gt; reflects the intended musical position for the
+ * change in state. It should not be used to compensate for latency issues in
+ * particular hardware configurations.
  */
 export interface Listening {
   /**
@@ -7228,7 +7521,7 @@ export interface Listening {
  */
 export interface Ensemble {
   /**
-   * {@link PositiveIntegerOrEmptyValue
+   * {@link PositiveIntegerOrEmptyValue}
    */
   v: PositiveIntegerOrEmptyValue
 }
@@ -7361,7 +7654,7 @@ export interface MidiDevice {
  */
 export interface Elevation {
   /**
-   * {@link RotationDegreesValue
+   * {@link RotationDegreesValue}
    */
   v: RotationDegreesValue
 }
@@ -7375,7 +7668,7 @@ export interface Elevation {
  */
 export interface MidiBank {
   /**
-   * {@link Midi-16384Value
+   * {@link Midi-16384Value}
    */
   v: Midi16384Value
 }
@@ -7389,7 +7682,7 @@ export interface MidiBank {
  */
 export interface MidiChannel {
   /**
-   * {@link Midi-16Value
+   * {@link Midi-16Value}
    */
   v: Midi16Value
 }
@@ -7414,7 +7707,7 @@ export interface MidiName {
  */
 export interface MidiProgram {
   /**
-   * {@link Midi-128Value
+   * {@link Midi-128Value}
    */
   v: Midi128Value
 }
@@ -7430,7 +7723,7 @@ export interface MidiProgram {
  */
 export interface MidiUnpitched {
   /**
-   * {@link Midi-128Value
+   * {@link Midi-128Value}
    */
   v: Midi128Value
 }
@@ -7446,7 +7739,7 @@ export interface MidiUnpitched {
  */
 export interface Pan {
   /**
-   * {@link RotationDegreesValue
+   * {@link RotationDegreesValue}
    */
   v: RotationDegreesValue
 }
@@ -7461,7 +7754,7 @@ export interface Pan {
  */
 export interface Volume {
   /**
-   * {@link PercentValue
+   * {@link PercentValue}
    */
   v: PercentValue
 }
@@ -7472,7 +7765,7 @@ export interface Volume {
  *
  * The &lt;midi-instrument&gt; element defines MIDI 1.0 instrument playback. The
  * &lt;midi-instrument&gt; element can be a part of either the
- * &lt;score-instrument&gt; element at the start of a part, or the &lt;sound&gt
+ * &lt;score-instrument&gt; element at the start of a part, or the &lt;sound&gt;
  * element within a part.
  */
 export interface MidiInstrument {
@@ -7535,7 +7828,7 @@ export interface Ipa {
  */
 export interface Mute {
   /**
-   * {@link MuteValue
+   * {@link MuteValue}
    */
   v: MuteValue
 }
@@ -7564,7 +7857,7 @@ export interface OtherPlay {
  */
 export interface SemiPitched {
   /**
-   * {@link SemiPitchedValue
+   * {@link SemiPitchedValue}
    */
   v: SemiPitchedValue
 }
@@ -7574,7 +7867,7 @@ export interface SemiPitched {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/play
  *
  * The &lt;play&gt; element specifies playback techniques to be used in conjunction
- * with the &lt;instrument-sound&gt; element. When used as part of a &lt;sound&gt
+ * with the &lt;instrument-sound&gt; element. When used as part of a &lt;sound&gt;
  * element, it applies to all notes going forward in score order. In
  * multi-instrument parts, the affected instrument should be specified using the id
  * attribute. When used as part of a &lt;note&gt; element, it applies to the
@@ -7612,7 +7905,7 @@ export interface Play {
  */
 export interface First {
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -7626,7 +7919,7 @@ export interface First {
  */
 export interface Second {
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -7660,7 +7953,7 @@ export interface SwingStyle {
  */
 export interface SwingType {
   /**
-   * {@link SwingTypeValueValue
+   * {@link SwingTypeValueValue}
    */
   v: SwingTypeValueValue
 }
@@ -7672,6 +7965,20 @@ export interface SwingType {
  * The &lt;swing&gt; element specifies whether or not to use swing playback, where
  * consecutive on-beat / off-beat eighth or 16th notes are played with unequal
  * nominal durations.
+ *
+ * The &lt;first&gt; and &lt;second&gt; elements are positive integers that specify
+ * the ratio between durations of consecutive notes. For example, a &lt;first&gt;
+ * element with a value of 2 and a &lt;second&gt; element with a value of 1 applied
+ * to eighth notes specifies a quarter note / eighth note tuplet playback, where
+ * the first note is twice as long as the second note. Ratios should be specified
+ * with the smallest integers possible. For example, a ratio of 6 to 4 should be
+ * specified as 3 to 2 instead.
+ *
+ * The &lt;swing&gt; element has no effect for playback of grace notes, notes where
+ * a &lt;type&gt; element is not present, and notes where the specified
+ * &lt;duration&gt; is different than the nominal value associated with the
+ * specified &lt;type&gt;. If a swung note has attack and release attributes, those
+ * values modify the swung playback.
  */
 export interface Swing {
   /**
@@ -7702,6 +8009,20 @@ export interface Swing {
  *
  * The &lt;sound&gt; element contains general playback parameters. They can stand
  * alone within a part/measure, or be a component element within a direction.
+ *
+ * Instrument changes, MIDI devices, MIDI instruments, and playback techniques are
+ * changed using the &lt;instrument-change&gt;, &lt;midi-device&gt;,
+ * &lt;midi-instrument&gt;, and &lt;play&gt; elements. When there are multiple
+ * instances of these elements, they should be grouped together by instrument using
+ * the id attribute values.
+ *
+ * The &lt;offset&gt; element is used to indicate that the sound takes place offset
+ * from the current score position. If the &lt;sound&gt; element is a child of a
+ * &lt;direction&gt; element, the sound &lt;offset&gt; element overrides the
+ * direction &lt;offset&gt; element if both elements are present. Note that the
+ * offset reflects the intended musical position for the change in sound. It should
+ * not be used to compensate for latency issues in particular hardware
+ * configurations.
  */
 export interface Sound {
   /**
@@ -7774,7 +8095,7 @@ export interface Sound {
    * Allows placing of sound in a 3-D space relative to the listener, expressed in
    * degrees ranging from -180 to 180. 0 is straight ahead, -90 is hard left, 90 is
    * hard right, and -180 and 180 are directly behind the listener.<br><br>Deprecated
-   * as of Version 2.0. The &lt;pan&gt; element in the &lt;midi-instrument&gt
+   * as of Version 2.0. The &lt;pan&gt; element in the &lt;midi-instrument&gt;
    * element should be used instead. If both are present, the &lt;pan&gt; element
    * takes priority.
    */
@@ -7854,10 +8175,13 @@ export interface Sound {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/staff.png">
+ *
+ * Staff assignment is only needed for music notated on multiple staves. Staff
+ * values are numbers, with 1 referring to the top-most staff in a part.
  */
 export interface Staff {
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -7883,8 +8207,14 @@ export interface Voice {
  * specific note. Two or more may be combined to indicate words followed by the
  * start of a dashed line, the end of a wedge followed by dynamics, etc. For
  * applications where a specific direction is indeed attached to a specific note,
- * the &lt;direction&gt; element can be associated with the first &lt;note&gt
+ * the &lt;direction&gt; element can be associated with the first &lt;note&gt;
  * element that follows it in score order that is not in a different voice.
+ *
+ * By default, a series of &lt;direction-type&gt; elements and a series of child
+ * elements of a &lt;direction-type&gt; within a single &lt;direction&gt; element
+ * follow one another in sequence visually. For a series of &lt;direction-type&gt;
+ * children, non-positional formatting attributes are carried over from the
+ * previous element by default.
  */
 export interface Direction {
   /**
@@ -7959,7 +8289,7 @@ export interface Extend {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -7976,7 +8306,7 @@ export interface Extend {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8014,7 +8344,7 @@ export interface FigureNumber {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8047,7 +8377,7 @@ export interface FigureNumber {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8080,7 +8410,7 @@ export interface Prefix {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8113,7 +8443,7 @@ export interface Prefix {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8137,7 +8467,7 @@ export interface Prefix {
  * both symbols that come after the figure number and those that overstrike the
  * figure number. The &lt;suffix&gt; values slash, back-slash, and vertical are
  * used for slashed numbers indicating chromatic alteration. The orientation and
- * display of the slash usually depends on the figure number. The &lt;suffix&gt
+ * display of the slash usually depends on the figure number. The &lt;suffix&gt;
  * element may contain additional values for symbols specific to particular figured
  * bass styles.
  */
@@ -8150,7 +8480,7 @@ export interface Suffix {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8183,7 +8513,7 @@ export interface Suffix {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8334,7 +8664,7 @@ export interface FiguredBass {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8424,9 +8754,13 @@ export interface Feature {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grouping
  *
  * The &lt;grouping&gt; element is used for musical analysis. When the type
- * attribute is start or single, it usually contains one or more &lt;feature&gt
+ * attribute is start or single, it usually contains one or more &lt;feature&gt;
  * elements.  Feature elements contained within a stop type of grouping may be
  * ignored.
+ *
+ * This element is flexible to allow for different types of analyses. Future
+ * versions of the MusicXML format may add elements that can represent more
+ * standardized categories of analysis data, allowing for easier data sharing.
  */
 export interface Grouping {
   /**
@@ -8472,7 +8806,7 @@ export interface BassAlter {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8514,7 +8848,7 @@ export interface BassAlter {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8527,7 +8861,7 @@ export interface BassAlter {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -8550,7 +8884,7 @@ export interface BassSeparator {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8583,7 +8917,7 @@ export interface BassSeparator {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8614,7 +8948,7 @@ export interface BassStep {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8647,7 +8981,7 @@ export interface BassStep {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8665,7 +8999,7 @@ export interface BassStep {
    */
   text?: TokenValue[]
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -8718,7 +9052,7 @@ export interface DegreeAlter {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8756,7 +9090,7 @@ export interface DegreeAlter {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8769,7 +9103,7 @@ export interface DegreeAlter {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -8792,7 +9126,7 @@ export interface DegreeType {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8825,7 +9159,7 @@ export interface DegreeType {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8842,7 +9176,7 @@ export interface DegreeType {
    */
   text?: TokenValue[]
   /**
-   * {@link DegreeTypeValueValue
+   * {@link DegreeTypeValueValue}
    */
   v: DegreeTypeValueValue
 }
@@ -8863,7 +9197,7 @@ export interface DegreeValue {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -8896,7 +9230,7 @@ export interface DegreeValue {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -8918,7 +9252,7 @@ export interface DegreeValue {
    */
   text?: TokenValue[]
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -8931,6 +9265,10 @@ export interface DegreeValue {
  * in the chord. The print-object attribute can be used to keep the degree from
  * printing separately when it has already taken into account in the text attribute
  * of the &lt;kind&gt; element.
+ *
+ * A harmony with a &lt;kind&gt; value of other can be spelled explicitly by using
+ * a series of &lt;degree&gt; elements together with a &lt;root&gt;,
+ * &lt;numeral&gt;, or &lt;function&gt; element.
  */
 export interface Degree {
   /**
@@ -8968,7 +9306,7 @@ export interface FirstFret {
    */
   text?: TokenValue[]
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -8982,7 +9320,7 @@ export interface FirstFret {
  */
 export interface FrameFrets {
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -9030,7 +9368,7 @@ export interface Fingering {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9068,7 +9406,7 @@ export interface Fingering {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9117,7 +9455,7 @@ export interface Fret {
    */
   fontWeight?: FontWeightValue[]
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -9139,7 +9477,7 @@ export interface StringType {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9177,7 +9515,7 @@ export interface StringType {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9190,7 +9528,7 @@ export interface StringType {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link StringNumberValue
+   * {@link StringNumberValue}
    */
   v: StringNumberValue
 }
@@ -9231,7 +9569,7 @@ export interface FrameNote {
  */
 export interface FrameStrings {
   /**
-   * {@link PositiveIntegerValue
+   * {@link PositiveIntegerValue}
    */
   v: PositiveIntegerValue
 }
@@ -9256,7 +9594,7 @@ export interface Frame {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9290,7 +9628,7 @@ export interface Frame {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9345,7 +9683,7 @@ export interface FunctionType {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9378,7 +9716,7 @@ export interface FunctionType {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9410,7 +9748,7 @@ export interface Inversion {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9443,7 +9781,7 @@ export interface Inversion {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9460,7 +9798,7 @@ export interface Inversion {
    */
   text?: TokenValue[]
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -9469,8 +9807,24 @@ export interface Inversion {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/kind
  *
- * The &lt;kind&gt; element indicates the type of chord. The &lt;degree&gt
+ * The &lt;kind&gt; element indicates the type of chord. The &lt;degree&gt;
  * elements can then add, subtract, or alter from these starting points
+ *
+ * The attributes are used to indicate the formatting of the symbol. Since the
+ * &lt;kind&gt; element is the constant in all the harmony-chord element groups
+ * that can make up a polychord, many formatting attributes are here. The alignment
+ * attributes are for the entire harmony-chord group of which this kind element is
+ * a part.
+ *
+ * For the major-minor &lt;kind&gt;, only the minor symbol is used when use-symbols
+ * is yes. The major symbol is set using the symbol attribute in the
+ * &lt;degree-value&gt; element. The corresponding &lt;degree-alter&gt; value will
+ * usually be 0 in this case.
+ *
+ * The text attribute may use strings such as "13sus" that refer to both the kind
+ * and one or more &lt;degree&gt; elements. In this case, the corresponding
+ * &lt;degree&gt; elements should have the print-object attribute set to no to keep
+ * redundant alterations from being displayed.
  */
 export interface Kind {
   /**
@@ -9486,7 +9840,7 @@ export interface Kind {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9536,7 +9890,7 @@ export interface Kind {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9574,7 +9928,7 @@ export interface Kind {
    */
   valign?: ValignValue[]
   /**
-   * {@link KindValueValue
+   * {@link KindValueValue}
    */
   v: KindValueValue
 }
@@ -9595,7 +9949,7 @@ export interface NumeralAlter {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9640,7 +9994,7 @@ export interface NumeralAlter {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9653,7 +10007,7 @@ export interface NumeralAlter {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -9667,7 +10021,7 @@ export interface NumeralAlter {
  */
 export interface NumeralFifths {
   /**
-   * {@link FifthsValue
+   * {@link FifthsValue}
    */
   v: FifthsValue
 }
@@ -9681,7 +10035,7 @@ export interface NumeralFifths {
  */
 export interface NumeralMode {
   /**
-   * {@link NumeralModeValue
+   * {@link NumeralModeValue}
    */
   v: NumeralModeValue
 }
@@ -9724,7 +10078,7 @@ export interface NumeralRoot {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9757,7 +10111,7 @@ export interface NumeralRoot {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9770,14 +10124,14 @@ export interface NumeralRoot {
    */
   relativeY?: TenthsValue[]
   /**
-   * Indicates how the numeral should appear in the score. A &lt;numeral-root&gt
+   * Indicates how the numeral should appear in the score. A &lt;numeral-root&gt;
    * value of 5 with a &lt;kind&gt; of major would have a text attribute of "V" if
    * displayed as a Roman numeral, and "5" if displayed as a Nashville number. The
    * display is application-dependent if not specified.
    */
   text?: TokenValue[]
   /**
-   * {@link NumeralValueValue
+   * {@link NumeralValueValue}
    */
   v: NumeralValueValue
 }
@@ -9813,8 +10167,8 @@ export interface Numeral {
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/root-alter.png"><br>The
  * &lt;root-alter&gt; element represents the chromatic alteration of the root of
  * the current chord within the &lt;harmony&gt; element. In some chord styles, the
- * text for the &lt;root-step&gt; element may include &lt;root-alter&gt
- * information. In that case, the print-object attribute of the &lt;root-alter&gt
+ * text for the &lt;root-step&gt; element may include &lt;root-alter&gt;
+ * information. In that case, the print-object attribute of the &lt;root-alter&gt;
  * element can be set to no.
  */
 export interface RootAlter {
@@ -9826,7 +10180,7 @@ export interface RootAlter {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9868,7 +10222,7 @@ export interface RootAlter {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9881,7 +10235,7 @@ export interface RootAlter {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -9904,7 +10258,7 @@ export interface RootStep {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -9937,7 +10291,7 @@ export interface RootStep {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -9955,7 +10309,7 @@ export interface RootStep {
    */
   text?: TokenValue[]
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -9965,7 +10319,7 @@ export interface RootStep {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/root
  *
  * The &lt;root&gt; element indicates a pitch like C, D, E vs. a scale degree like
- * 1, 2, 3. It is used with chord symbols in popular music. The &lt;root&gt
+ * 1, 2, 3. It is used with chord symbols in popular music. The &lt;root&gt;
  * element has a &lt;root-step&gt; and optional &lt;root-alter&gt; element similar
  * to the &lt;step&gt; and &lt;alter&gt; elements, but renamed to distinguish the
  * different musical meanings.
@@ -9988,6 +10342,24 @@ export interface Root {
  * The &lt;harmony&gt; element represents harmony analysis, including  chord
  * symbols in popular music as well as functional harmony analysis in classical
  * music.
+ *
+ * The print-object attribute controls whether or not anything is printed due to
+ * the &lt;harmony&gt; element. The print suggestion attributes set the defaults
+ * for the harmony, but individual elements can override this with their own
+ * values.
+ *
+ * A &lt;harmony&gt; element can contain many stacked chords (e.g. V of II). Each
+ * individual chord including a required &lt;kind&gt; element is referred to as a
+ * harmony-chord. Stacked chords or secondary functions are represented using a
+ * sequence of harmony-chords. For example, V of II would be represented by a
+ * harmony-chord with a 5 numeral followed by a harmony-chord with a 2 numeral.
+ *
+ * A &lt;root&gt; is a pitch name like C, D, E, while a &lt;numeral&gt; is a scale
+ * degree like 1, 2, 3. The &lt;root&gt; element is generally used with pop chord
+ * symbols, while the &lt;numeral&gt; element is generally used with classical
+ * functional harmony and Nashville numbers. It is an either/or choice to avoid
+ * data inconsistency. The &lt;function&gt; element, which represents Roman
+ * numerals with roman numeral text, has been deprecated as of MusicXML 4.0.
  */
 export interface Harmony {
   /**
@@ -10055,7 +10427,7 @@ export interface Harmony {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10075,7 +10447,7 @@ export interface Harmony {
   /**
    * If there are alternate harmonies possible, this can be specified using multiple
    * &lt;harmony&gt; elements differentiated by type. Explicit harmonies have all
-   * note present in the music; implied have some notes missing but implied
+   * note present in the music; implied have some notes missing but implied;
    * alternate represents alternate analyses.
    */
   type?: HarmonyTypeValue[]
@@ -10156,7 +10528,7 @@ export interface Accidental {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -10199,7 +10571,7 @@ export interface Accidental {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10224,7 +10596,7 @@ export interface Accidental {
    */
   smufl?: SmuflAccidentalGlyphNameValue[]
   /**
-   * {@link AccidentalValueValue
+   * {@link AccidentalValueValue}
    */
   v: AccidentalValueValue
 }
@@ -10269,7 +10641,7 @@ export interface Beam {
    */
   repeater?: YesNoValue[]
   /**
-   * {@link BeamValueValue
+   * {@link BeamValueValue}
    */
   v: BeamValueValue
 }
@@ -10282,6 +10654,19 @@ export interface Beam {
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/chord.png"><br>The
  * &lt;chord&gt; element indicates that this note is an additional chord tone with
  * the preceding note.
+ *
+ * The &lt;duration&gt; of a &lt;chord&gt; note does not move the musical position
+ * within a &lt;measure&gt;. That is done by the &lt;duration&gt; of the first
+ * preceding note without a &lt;chord&gt; element. Thus the &lt;duration&gt; of a
+ * &lt;chord&gt; note cannot be longer than the preceding note.
+ *
+ * In most cases the &lt;duration&gt; will be the same as the preceding note.
+ * However it can be shorter in situations such as multiple stops for string
+ * instruments. Here is an example from Mozart's Concerto No. 3 for Violin, K.
+ * 216:<br><img
+ * src="https://www.w3.org/2021/06/musicxml40/static/elements/chord-multiple-stop.png"><br>If
+ * these first three notes are represented as a chord, the quarter notes must be
+ * the ones with the &lt;chord&gt; element.
  */
 export interface Chord {}
 
@@ -10312,7 +10697,7 @@ export interface Dot {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -10350,7 +10735,7 @@ export interface Dot {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10398,11 +10783,11 @@ export interface Grace {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/instrument
  *
- * The &lt;instrument&gt; element distinguishes between &lt;score-instrument&gt
+ * The &lt;instrument&gt; element distinguishes between &lt;score-instrument&gt;
  * elements in a &lt;score-part&gt;. If multiple &lt;score-instrument&gt; elements
- * are specified in a &lt;score-part&gt;, there should be an &lt;instrument&gt
+ * are specified in a &lt;score-part&gt;, there should be an &lt;instrument&gt;
  * element for each note in the &lt;part&gt;. Notes that are shared between
- * multiple &lt;score-instrument&gt;s can have more than one &lt;instrument&gt
+ * multiple &lt;score-instrument&gt;s can have more than one &lt;instrument&gt;
  * element.
  */
 export interface Instrument {
@@ -10594,7 +10979,7 @@ export interface Laughing {}
  */
 export interface Syllabic {
   /**
-   * {@link SyllabicValue
+   * {@link SyllabicValue}
    */
   v: SyllabicValue
 }
@@ -10677,10 +11062,17 @@ export interface Text {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/lyric.png"><br>The
- * &lt;lyric&gt; element represents text underlays for lyrics. Two &lt;text&gt
+ * &lt;lyric&gt; element represents text underlays for lyrics. Two &lt;text&gt;
  * elements that are not separated by an &lt;elision&gt; element are part of the
- * same syllable, but may have different text formatting. A second &lt;syllabic&gt
+ * same syllable, but may have different text formatting. A second &lt;syllabic&gt;
  * element is not allowed unless preceded by an &lt;elision&gt; element.
+ *
+ * If not otherwise specified:<br>
+ *
+ * <li>The justify value is center.</li><li>The placement value is
+ * below.</li><li>The valign value is baseline.</li><li>The halign value matches
+ * the justify value.</li>
+ *
  */
 export interface Lyric {
   /**
@@ -10691,7 +11083,7 @@ export interface Lyric {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -10736,7 +11128,7 @@ export interface Lyric {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10818,7 +11210,7 @@ export interface AccidentalMark {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -10865,7 +11257,7 @@ export interface AccidentalMark {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10890,7 +11282,7 @@ export interface AccidentalMark {
    */
   smufl?: SmuflAccidentalGlyphNameValue[]
   /**
-   * {@link AccidentalValueValue
+   * {@link AccidentalValueValue}
    */
   v: AccidentalValueValue
 }
@@ -10915,7 +11307,7 @@ export interface Arpeggiate {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -10951,7 +11343,7 @@ export interface Arpeggiate {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -10988,7 +11380,7 @@ export interface Accent {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11026,7 +11418,7 @@ export interface Accent {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11057,7 +11449,7 @@ export interface BreathMark {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11095,7 +11487,7 @@ export interface BreathMark {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11108,7 +11500,7 @@ export interface BreathMark {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link BreathMarkValueValue
+   * {@link BreathMarkValueValue}
    */
   v: BreathMarkValueValue
 }
@@ -11129,7 +11521,7 @@ export interface Caesura {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11167,7 +11559,7 @@ export interface Caesura {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11180,7 +11572,7 @@ export interface Caesura {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link CaesuraValueValue
+   * {@link CaesuraValueValue}
    */
   v: CaesuraValueValue
 }
@@ -11203,7 +11595,7 @@ export interface DetachedLegato {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11241,7 +11633,7 @@ export interface DetachedLegato {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11278,7 +11670,7 @@ export interface Doit {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11329,7 +11721,7 @@ export interface Doit {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11371,7 +11763,7 @@ export interface Falloff {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11422,7 +11814,7 @@ export interface Falloff {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11462,7 +11854,7 @@ export interface OtherArticulation {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11500,7 +11892,7 @@ export interface OtherArticulation {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11544,7 +11936,7 @@ export interface Plop {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11595,7 +11987,7 @@ export interface Plop {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11637,7 +12029,7 @@ export interface Scoop {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11688,7 +12080,7 @@ export interface Scoop {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11713,6 +12105,13 @@ export interface Scoop {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/soft-accent.png">
+ *
+ * The &lt;soft-accent&gt; element indicates a soft accent that is not as heavy as
+ * a normal accent. It is often notated as &lt;&gt;. It can be combined with other
+ * articulations to implement the first eight symbols in the Standard Music Font
+ * Layout (SMuFL) <a
+ * href="https://www.w3.org/2021/03/smufl14/tables/articulation-supplement.html">Articulation
+ * supplement</a> range.
  */
 export interface SoftAccent {
   /**
@@ -11723,7 +12122,7 @@ export interface SoftAccent {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11761,7 +12160,7 @@ export interface SoftAccent {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11793,7 +12192,7 @@ export interface Spiccato {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11831,7 +12230,7 @@ export interface Spiccato {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11863,7 +12262,7 @@ export interface Staccatissimo {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11901,7 +12300,7 @@ export interface Staccatissimo {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11933,7 +12332,7 @@ export interface Staccato {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -11971,7 +12370,7 @@ export interface Staccato {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -11990,6 +12389,8 @@ export interface Staccato {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stress
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/stress.png">
+ *
+ * The &lt;stress&gt; element indicates a stressed note.
  */
 export interface Stress {
   /**
@@ -12000,7 +12401,7 @@ export interface Stress {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12038,7 +12439,7 @@ export interface Stress {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12058,6 +12459,8 @@ export interface Stress {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/strong-accent.png">
+ *
+ * The &lt;strong-accent&gt; element indicates a vertical accent mark.
  */
 export interface StrongAccent {
   /**
@@ -12068,7 +12471,7 @@ export interface StrongAccent {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12106,7 +12509,7 @@ export interface StrongAccent {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12141,7 +12544,7 @@ export interface Tenuto {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12179,7 +12582,7 @@ export interface Tenuto {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12198,6 +12601,9 @@ export interface Tenuto {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/unstress
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/unstress.png">
+ *
+ * The &lt;unstress&gt; element indicates an unstressed note. It is often notated
+ * using a u-shaped symbol.
  */
 export interface Unstress {
   /**
@@ -12208,7 +12614,7 @@ export interface Unstress {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12246,7 +12652,7 @@ export interface Unstress {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12372,7 +12778,7 @@ export interface Glissando {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12418,7 +12824,7 @@ export interface Glissando {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12462,7 +12868,7 @@ export interface NonArpeggiate {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12493,7 +12899,7 @@ export interface NonArpeggiate {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12513,6 +12919,10 @@ export interface NonArpeggiate {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/delayed-inverted-turn.png">
+ *
+ * The &lt;delayed-inverted-turn&gt; element indicates an inverted turn that is
+ * delayed until the end of the current note. An inverted turn has the shape which
+ * goes down and then up.
  */
 export interface DelayedInvertedTurn {
   /**
@@ -12532,7 +12942,7 @@ export interface DelayedInvertedTurn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12575,7 +12985,7 @@ export interface DelayedInvertedTurn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12641,7 +13051,7 @@ export interface DelayedTurn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12684,7 +13094,7 @@ export interface DelayedTurn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12728,6 +13138,9 @@ export interface DelayedTurn {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/haydn
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/haydn.png">
+ *
+ * The &lt;haydn&gt; element represents the Haydn ornament. This is defined in the
+ * Standard Music Font Layout (SMuFL) as ornamentHaydn.
  */
 export interface Haydn {
   /**
@@ -12747,7 +13160,7 @@ export interface Haydn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12790,7 +13203,7 @@ export interface Haydn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12857,7 +13270,7 @@ export interface InvertedMordent {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -12910,7 +13323,7 @@ export interface InvertedMordent {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -12950,6 +13363,8 @@ export interface InvertedMordent {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/inverted-turn.png">
+ *
+ * The &lt;inverted-turn&gt; element has the shape which goes down and then up.
  */
 export interface InvertedTurn {
   /**
@@ -12969,7 +13384,7 @@ export interface InvertedTurn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13012,7 +13427,7 @@ export interface InvertedTurn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13057,6 +13472,9 @@ export interface InvertedTurn {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/inverted-vertical-turn.png">
+ *
+ * The &lt;inverted-vertical-turn&gt; element has the turn symbol shape arranged
+ * vertically going from upper right to lower left.
  */
 export interface InvertedVerticalTurn {
   /**
@@ -13076,7 +13494,7 @@ export interface InvertedVerticalTurn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13119,7 +13537,7 @@ export interface InvertedVerticalTurn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13186,7 +13604,7 @@ export interface Mordent {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13239,7 +13657,7 @@ export interface Mordent {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13293,7 +13711,7 @@ export interface OtherOrnament {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13331,7 +13749,7 @@ export interface OtherOrnament {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13370,7 +13788,7 @@ export interface Schleifer {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13408,7 +13826,7 @@ export interface Schleifer {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13427,6 +13845,9 @@ export interface Schleifer {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/shake
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/shake.png">
+ *
+ * The &lt;shake&gt; element has a similar appearance to an
+ * &lt;inverted-mordent&gt; element.
  */
 export interface Shake {
   /**
@@ -13446,7 +13867,7 @@ export interface Shake {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13489,7 +13910,7 @@ export interface Shake {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13534,6 +13955,20 @@ export interface Shake {
  * marks and is an integer from 0 to 8. Note that the number of attached beams is
  * not included in this value, but is represented separately using the &lt;beam
  * element&gt;. The value should be 0 for unmeasured tremolos.
+ *
+ * When using double-note tremolos, the duration of each note in the tremolo should
+ * correspond to half of the notated type value. A &lt;time-modification&gt;
+ * element should also be added with an &lt;actual-notes&gt; value of 2 and a
+ * &lt;normal-notes&gt; value of 1. If used within a tuplet, this 2/1 ratio should
+ * be multiplied by the existing tuplet ratio.
+ *
+ * The smufl attribute specifies the glyph to use from the Standard Music Font
+ * Layout (SMuFL) <a
+ * href="https://www.w3.org/2021/03/smufl14/tables/tremolos.html">Tremolos
+ * range</a> for an unmeasured tremolo. It is ignored for other tremolo types. The
+ * SMuFL buzzRoll glyph is used if the attribute is missing.
+ *
+ * Using repeater beams for indicating tremolos is deprecated as of Version 3.0.
  */
 export interface Tremolo {
   /**
@@ -13544,7 +13979,7 @@ export interface Tremolo {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13582,7 +14017,7 @@ export interface Tremolo {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13607,7 +14042,7 @@ export interface Tremolo {
    */
   type?: TremoloTypeValue[]
   /**
-   * {@link TremoloMarksValue
+   * {@link TremoloMarksValue}
    */
   v: TremoloMarksValue
 }
@@ -13638,7 +14073,7 @@ export interface TrillMark {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13681,7 +14116,7 @@ export interface TrillMark {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13720,6 +14155,8 @@ export interface TrillMark {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/turn
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/turn.png">
+ *
+ * The &lt;turn&gt; element is the normal turn shape which goes up then down.
  */
 export interface Turn {
   /**
@@ -13739,7 +14176,7 @@ export interface Turn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13782,7 +14219,7 @@ export interface Turn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -13827,6 +14264,9 @@ export interface Turn {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/vertical-turn.png">
+ *
+ * The &lt;vertical-turn&gt; element has the turn symbol shape arranged vertically
+ * going from upper left to lower right.
  */
 export interface VerticalTurn {
   /**
@@ -13846,7 +14286,7 @@ export interface VerticalTurn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -13889,7 +14329,7 @@ export interface VerticalTurn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14010,6 +14450,12 @@ export interface Ornaments {
  * The &lt;other-notation&gt; element is used to define any notations not yet in
  * the MusicXML format. It handles notations where more specific extension elements
  * such as &lt;other-dynamics&gt; and &lt;other-technical&gt; are not appropriate.
+ *
+ * The smufl attribute can be used to specify a particular notation, allowing
+ * application interoperability without requiring every Standard Music Font Layout
+ * (SMuFL) glyph to have a MusicXML element equivalent. Using the
+ * &lt;other-notation&gt; element without the smufl attribute allows for extended
+ * representation, though without application interoperability.
  */
 export interface OtherNotation {
   /**
@@ -14025,7 +14471,7 @@ export interface OtherNotation {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14076,7 +14522,7 @@ export interface OtherNotation {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14135,7 +14581,7 @@ export interface Slide {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14189,7 +14635,7 @@ export interface Slide {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14219,6 +14665,11 @@ export interface Slide {
  * one with a stop type. Slurs can add more elements using a continue type. This is
  * typically used to specify the formatting of cross-system slurs, or to specify
  * the shape of very complex slurs.
+ *
+ * Normal slurs and S-shaped slurs need only two bezier points: one associated with
+ * the start of the slur, the other with the stop. Complex slurs and slurs divided
+ * over system breaks can specify additional bezier data at &lt;slur&gt; elements
+ * with a continue type.
  */
 export interface Slur {
   /**
@@ -14275,7 +14726,7 @@ export interface Slur {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14314,7 +14765,7 @@ export interface Slur {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14342,7 +14793,7 @@ export interface Slur {
  */
 export interface ArrowDirection {
   /**
-   * {@link ArrowDirectionValue
+   * {@link ArrowDirectionValue}
    */
   v: ArrowDirectionValue
 }
@@ -14356,7 +14807,7 @@ export interface ArrowDirection {
  */
 export interface ArrowStyle {
   /**
-   * {@link ArrowStyleValue
+   * {@link ArrowStyleValue}
    */
   v: ArrowStyleValue
 }
@@ -14366,6 +14817,9 @@ export interface ArrowStyle {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/arrowhead
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/arrowhead.png">
+ *
+ * The presence of an &lt;arrowhead&gt; element indicates that only the arrowhead
+ * is displayed within the &lt;arrow&gt;, not the arrow stem.
  */
 export interface Arrowhead {}
 
@@ -14380,7 +14834,7 @@ export interface Arrowhead {}
  */
 export interface CircularArrow {
   /**
-   * {@link CircularArrowValue
+   * {@link CircularArrowValue}
    */
   v: CircularArrowValue
 }
@@ -14406,7 +14860,7 @@ export interface Arrow {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14444,7 +14898,7 @@ export interface Arrow {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14494,7 +14948,7 @@ export interface Arrow {
  */
 export interface BendAlter {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -14543,7 +14997,7 @@ export interface WithBar {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14581,7 +15035,7 @@ export interface WithBar {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14622,7 +15076,7 @@ export interface Bend {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14663,7 +15117,7 @@ export interface Bend {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14704,6 +15158,9 @@ export interface Bend {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/brass-bend
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/brass-bend.png">
+ *
+ * The &lt;brass-bend&gt; element represents the u-shaped bend symbol used in brass
+ * notation, distinct from the &lt;bend&gt; element used in guitar music.
  */
 export interface BrassBend {
   /**
@@ -14714,7 +15171,7 @@ export interface BrassBend {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14752,7 +15209,7 @@ export interface BrassBend {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14772,6 +15229,9 @@ export interface BrassBend {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/double-tongue.png">
+ *
+ * The &lt;double-tongue&gt; element represents the double tongue symbol (two dots
+ * arranged horizontally).
  */
 export interface DoubleTongue {
   /**
@@ -14782,7 +15242,7 @@ export interface DoubleTongue {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14820,7 +15280,7 @@ export interface DoubleTongue {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14839,6 +15299,9 @@ export interface DoubleTongue {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/down-bow
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/down-bow.png">
+ *
+ * The &lt;down-bow&gt; element represents the symbol that is used both for
+ * down-bowing on bowed instruments, and down-stroke on plucked instruments.
  */
 export interface DownBow {
   /**
@@ -14849,7 +15312,7 @@ export interface DownBow {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14887,7 +15350,7 @@ export interface DownBow {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14907,6 +15370,9 @@ export interface DownBow {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/fingernails.png">
+ *
+ * The &lt;fingernails&gt; element is used in notation for harp and other plucked
+ * string instruments.
  */
 export interface Fingernails {
   /**
@@ -14917,7 +15383,7 @@ export interface Fingernails {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -14955,7 +15421,7 @@ export interface Fingernails {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -14974,6 +15440,8 @@ export interface Fingernails {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/flip
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/flip.png">
+ *
+ * The &lt;flip&gt; element represents the flip symbol used in brass notation.
  */
 export interface Flip {
   /**
@@ -14984,7 +15452,7 @@ export interface Flip {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15022,7 +15490,7 @@ export interface Flip {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15041,6 +15509,9 @@ export interface Flip {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/golpe
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/golpe.png">
+ *
+ * The &lt;golpe&gt; element represents the golpe symbol that is used for tapping
+ * the pick guard in guitar music.
  */
 export interface Golpe {
   /**
@@ -15051,7 +15522,7 @@ export interface Golpe {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15089,7 +15560,7 @@ export interface Golpe {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15108,6 +15579,12 @@ export interface Golpe {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/half-muted
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/half-muted.png">
+ *
+ * The &lt;half-muted&gt; element represents the half-muted symbol, which looks
+ * like a circle with a plus sign inside. The smufl attribute can be used to
+ * distinguish different SMuFL glyphs that have a similar appearance such as
+ * brassMuteHalfClosed and guitarHalfOpenPedal. If not present, the default glyph
+ * is brassMuteHalfClosed.
  */
 export interface HalfMuted {
   /**
@@ -15118,7 +15595,7 @@ export interface HalfMuted {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15156,7 +15633,7 @@ export interface HalfMuted {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15201,7 +15678,7 @@ export interface HammerOn {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15244,7 +15721,7 @@ export interface HammerOn {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15275,7 +15752,7 @@ export interface Handbell {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15313,7 +15790,7 @@ export interface Handbell {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15326,7 +15803,7 @@ export interface Handbell {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link HandbellValueValue
+   * {@link HandbellValueValue}
    */
   v: HandbellValueValue
 }
@@ -15345,7 +15822,7 @@ export interface HarmonClosed {
    */
   location?: HarmonClosedLocationValue[]
   /**
-   * {@link HarmonClosedValueValue
+   * {@link HarmonClosedValueValue}
    */
   v: HarmonClosedValueValue
 }
@@ -15356,6 +15833,9 @@ export interface HarmonClosed {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/harmon-mute.png">
+ *
+ * The &lt;harmon-mute&gt; element represents the symbols used for harmon mutes in
+ * brass notation.
  */
 export interface HarmonMute {
   /**
@@ -15366,7 +15846,7 @@ export interface HarmonMute {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15404,7 +15884,7 @@ export interface HarmonMute {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15491,7 +15971,7 @@ export interface Harmonic {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15533,7 +16013,7 @@ export interface Harmonic {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15572,6 +16052,8 @@ export interface Harmonic {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/heel
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/heel.png">
+ *
+ * The &lt;heel&gt; element is used with organ pedals.
  */
 export interface Heel {
   /**
@@ -15582,7 +16064,7 @@ export interface Heel {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15620,7 +16102,7 @@ export interface Heel {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15652,7 +16134,7 @@ export interface HoleClosed {
    */
   location?: HoleClosedLocationValue[]
   /**
-   * {@link HoleClosedValueValue
+   * {@link HoleClosedValueValue}
    */
   v: HoleClosedValueValue
 }
@@ -15697,7 +16179,7 @@ export interface Hole {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15735,7 +16217,7 @@ export interface Hole {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15779,7 +16261,7 @@ export interface Open {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15817,7 +16299,7 @@ export interface Open {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15843,6 +16325,8 @@ export interface Open {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/open-string.png">
+ *
+ * The &lt;open-string&gt; element represents the zero-shaped open string symbol.
  */
 export interface OpenString {
   /**
@@ -15853,7 +16337,7 @@ export interface OpenString {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15891,7 +16375,7 @@ export interface OpenString {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -15926,7 +16410,7 @@ export interface OtherTechnical {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -15964,7 +16448,7 @@ export interface OtherTechnical {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16003,7 +16487,7 @@ export interface Pluck {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16041,7 +16525,7 @@ export interface Pluck {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16081,7 +16565,7 @@ export interface PullOff {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16123,7 +16607,7 @@ export interface PullOff {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16143,6 +16627,9 @@ export interface PullOff {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/smear
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/smear.png">
+ *
+ * The &lt;smear&gt; element represents the tilde-shaped smear symbol used in brass
+ * notation.
  */
 export interface Smear {
   /**
@@ -16153,7 +16640,7 @@ export interface Smear {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16191,7 +16678,7 @@ export interface Smear {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16225,7 +16712,7 @@ export interface SnapPizzicato {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16263,7 +16750,7 @@ export interface SnapPizzicato {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16298,7 +16785,7 @@ export interface Stopped {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16336,7 +16823,7 @@ export interface Stopped {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16373,7 +16860,7 @@ export interface Tap {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16417,7 +16904,7 @@ export interface Tap {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16452,7 +16939,7 @@ export interface ThumbPosition {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16490,7 +16977,7 @@ export interface ThumbPosition {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16509,6 +16996,8 @@ export interface ThumbPosition {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/toe
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/toe.png">
+ *
+ * The &lt;toe&gt; element is used with organ pedals.
  */
 export interface Toe {
   /**
@@ -16519,7 +17008,7 @@ export interface Toe {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16557,7 +17046,7 @@ export interface Toe {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16582,6 +17071,9 @@ export interface Toe {
  *
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/triple-tongue.png">
+ *
+ * The &lt;triple-tongue&gt; element represents the triple tongue symbol (three
+ * dots arranged horizontally).
  */
 export interface TripleTongue {
   /**
@@ -16592,7 +17084,7 @@ export interface TripleTongue {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16630,7 +17122,7 @@ export interface TripleTongue {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16649,6 +17141,9 @@ export interface TripleTongue {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/up-bow
  *
  * <img src="https://www.w3.org/2021/06/musicxml40/static/elements/up-bow.png">
+ *
+ * The &lt;up-bow&gt; element represents the symbol that is used both for up-bowing
+ * on bowed instruments, and up-stroke on plucked instruments.
  */
 export interface UpBow {
   /**
@@ -16659,7 +17154,7 @@ export interface UpBow {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16697,7 +17192,7 @@ export interface UpBow {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -16857,6 +17352,31 @@ export interface Technical {
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/tied.png"><br>The
  * &lt;tied&gt; element represents the notated tie. The &lt;tie&gt; element
  * represents the tie sound.
+ *
+ * Ties that join two notes of the same pitch together should be represented with a
+ * &lt;tied&gt; element on the first note with type="start" and a &lt;tied&gt;
+ * element on the second note with type="stop".  This can also be done if the two
+ * notes being tied are enharmonically equivalent, but have different step values.
+ * It is not recommended to use &lt;tied&gt; elements to join two notes with
+ * enharmonically inequivalent pitches.
+ *
+ * Ties that indicate that an instrument should be undamped are specified with a
+ * single &lt;tied&gt; element with type="let-ring".
+ *
+ * Ties that are visually attached to only one note, other than undamped ties,
+ * should be specified with two &lt;tied&gt; elements on the same note, first
+ * type="start" then type="stop". This can be used to represent ties into or out of
+ * repeated sections or codas.
+ *
+ * When multiple &lt;tied&gt; elements with the same tag are used within the same
+ * note, their order within the MusicXML document should match the musical score
+ * order. For example, a note with a tie at the end of a first ending should have
+ * the &lt;tied&gt; element with a type of start precede the &lt;tied&gt; element
+ * with a type of stop.
+ *
+ * Normal ties need only two bezier points: one associated with the start of the
+ * tie, the other with the stop. Ties divided over system breaks can specify
+ * additional bezier data at &lt;tied&gt; elements with a continue type.
  */
 export interface Tied {
   /**
@@ -16914,7 +17434,7 @@ export interface Tied {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -16954,7 +17474,7 @@ export interface Tied {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -17031,7 +17551,7 @@ export interface TupletNumber {
    */
   fontWeight?: FontWeightValue[]
   /**
-   * {@link NonNegativeIntegerValue
+   * {@link NonNegativeIntegerValue}
    */
   v: NonNegativeIntegerValue
 }
@@ -17065,7 +17585,7 @@ export interface TupletType {
    */
   fontWeight?: FontWeightValue[]
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -17125,8 +17645,15 @@ export interface TupletNormal {
  * <img
  * src="https://www.w3.org/2021/06/musicxml40/static/elements/tuplet.png"><br>A
  * &lt;tuplet&gt; element is present when a tuplet is to be displayed graphically,
- * in addition to the sound data provided by the &lt;time-modification&gt
+ * in addition to the sound data provided by the &lt;time-modification&gt;
  * elements.
+ *
+ * Whereas a &lt;time-modification&gt; element shows how the cumulative, sounding
+ * effect of tuplets and double-note tremolos compare to the written note type, the
+ * &lt;tuplet&gt; element describes how this is displayed. The &lt;tuplet&gt;
+ * element also provides more detailed representation information than the
+ * &lt;time-modification&gt; element, and is needed to represent nested tuplets and
+ * other complex tuplets accurately.
  */
 export interface Tuplet {
   /**
@@ -17142,7 +17669,7 @@ export interface Tuplet {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -17177,7 +17704,7 @@ export interface Tuplet {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -17301,6 +17828,20 @@ export interface Notations {
  *
  * The &lt;notehead&gt; element indicates shapes other than the open and closed
  * ovals associated with note durations.
+ *
+ * The smufl attribute can be used to specify a particular notehead, allowing
+ * application interoperability without requiring every Standard Music Font Layout
+ * (SMuFL) glyph to have a MusicXML element equivalent. This attribute can be used
+ * either with the other value, or to refine a specific notehead value such as
+ * cluster.
+ *
+ * Noteheads in the SMuFL <a
+ * href="https://www.w3.org/2021/03/smufl14/tables/note-name-noteheads.html">Note
+ * name noteheads</a> and <a
+ * href="https://www.w3.org/2021/03/smufl14/tables/note-name-noteheads-supplement.html">Note
+ * name noteheads supplement</a> ranges (U+E150–U+E1AF and U+EEE0–U+EEFF) should
+ * not use the smufl attribute or the other value, but instead use the
+ * &lt;notehead-text&gt; element.
  */
 export interface Notehead {
   /**
@@ -17339,7 +17880,7 @@ export interface Notehead {
    */
   smufl?: SmuflGlyphNameValue[]
   /**
-   * {@link NoteheadValueValue
+   * {@link NoteheadValueValue}
    */
   v: NoteheadValueValue
 }
@@ -17446,7 +17987,7 @@ export interface AccidentalText {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -17485,7 +18026,7 @@ export interface AccidentalText {
    */
   xmlSpace?: XmlSpaceValue[]
   /**
-   * {@link AccidentalValueValue
+   * {@link AccidentalValueValue}
    */
   v: AccidentalValueValue
 }
@@ -17592,7 +18133,7 @@ export interface DisplayText {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -17660,7 +18201,7 @@ export interface NoteheadText {
  */
 export interface Alter {
   /**
-   * {@link SemitonesValue
+   * {@link SemitonesValue}
    */
   v: SemitonesValue
 }
@@ -17674,7 +18215,7 @@ export interface Alter {
  */
 export interface Octave {
   /**
-   * {@link OctaveValue
+   * {@link OctaveValue}
    */
   v: OctaveValue
 }
@@ -17688,7 +18229,7 @@ export interface Octave {
  */
 export interface Step {
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -17727,7 +18268,7 @@ export interface Pitch {
  */
 export interface DisplayOctave {
   /**
-   * {@link OctaveValue
+   * {@link OctaveValue}
    */
   v: OctaveValue
 }
@@ -17744,7 +18285,7 @@ export interface DisplayOctave {
  */
 export interface DisplayStep {
   /**
-   * {@link StepValue
+   * {@link StepValue}
    */
   v: StepValue
 }
@@ -17753,7 +18294,7 @@ export interface DisplayStep {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/rest
  *
- * The &lt;rest&gt; element indicates notated rests or silences. A &lt;rest&gt
+ * The &lt;rest&gt; element indicates notated rests or silences. A &lt;rest&gt;
  * element is usually empty, but placement on the staff can be specified using
  * &lt;display-step&gt; and &lt;display-octave&gt; elements.
  */
@@ -17812,7 +18353,7 @@ export interface Stem {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link StemValueValue
+   * {@link StemValueValue}
    */
   v: StemValueValue
 }
@@ -17884,7 +18425,7 @@ export interface Type {
    */
   size?: SymbolSizeValue[]
   /**
-   * {@link NoteTypeValueValue
+   * {@link NoteTypeValueValue}
    */
   v: NoteTypeValueValue
 }
@@ -17899,7 +18440,7 @@ export interface Type {
  * lack definite pitch, such as unpitched percussion and speaking voice. If the
  * child elements are not present, the note is placed on the middle line of the
  * staff. This is generally used with a one-line staff. Notes in percussion clef
- * should always use an &lt;unpitched&gt; element rather than a &lt;pitch&gt
+ * should always use an &lt;unpitched&gt; element rather than a &lt;pitch&gt;
  * element.
  */
 export interface Unpitched {
@@ -17930,7 +18471,7 @@ export interface Note {
   /**
    * Alters the starting time of the note from when it would otherwise occur based on
    * the flow of durations - information that is specific to a performance. It is
-   * expressed in terms of divisions, either positive or negative. A &lt;note&gt
+   * expressed in terms of divisions, either positive or negative. A &lt;note&gt;
    * that stops a tie should not have an attack attribute. The attack and release
    * attributes are independent of each other. The attack attribute only changes the
    * starting time of a note.
@@ -18027,7 +18568,7 @@ export interface Note {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -18042,7 +18583,7 @@ export interface Note {
   /**
    * Alters the stopping time of the note from when it would otherwise occur based on
    * the flow of durations - information that is specific to a performance. It is
-   * expressed in terms of divisions, either positive or negative. A &lt;note&gt
+   * expressed in terms of divisions, either positive or negative. A &lt;note&gt;
    * that starts a tie should not have a release attribute. The attack and release
    * attributes are independent of each other. The release attribute only changes the
    * stopping time of a note.
@@ -18165,7 +18706,7 @@ export interface Note {
  */
 export interface MeasureDistance {
   /**
-   * {@link TenthsValue
+   * {@link TenthsValue}
    */
   v: TenthsValue
 }
@@ -18266,7 +18807,7 @@ export interface MeasureNumbering {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -18295,7 +18836,7 @@ export interface MeasureNumbering {
    */
   valign?: ValignValue[]
   /**
-   * {@link MeasureNumberingValueValue
+   * {@link MeasureNumberingValueValue}
    */
   v: MeasureNumberingValueValue
 }
@@ -18308,6 +18849,9 @@ export interface MeasureNumbering {
  * multi-font text in part abbreviations to the left of the system. The
  * print-object attribute can be used to determine what, if anything, is printed at
  * the start of each system.
+ *
+ * Formatting specified in the &lt;part-abbreviation-display&gt; element overrides
+ * formatting specified in the &lt;part-abbreviation&gt; element.
  */
 export interface PartAbbreviationDisplay {
   /**
@@ -18331,6 +18875,9 @@ export interface PartAbbreviationDisplay {
  * The &lt;part-name-display&gt; element is used for exact formatting of multi-font
  * text in part names to the left of the system. The print-object attribute can be
  * used to determine what, if anything, is printed at the start of each system.
+ *
+ * Formatting specified in the &lt;part-name-display&gt; element overrides
+ * formatting specified in the &lt;part-name&gt; element.
  */
 export interface PartNameDisplay {
   /**
@@ -18352,10 +18899,14 @@ export interface PartNameDisplay {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/print
  *
  * The &lt;print&gt; element contains general printing parameters, including layout
- * elements. The &lt;part-name-display&gt; and &lt;part-abbreviation-display&gt
+ * elements. The &lt;part-name-display&gt; and &lt;part-abbreviation-display&gt;
  * elements may also be used here to change how a part name or abbreviation is
  * displayed over the course of a piece. They take effect when the current measure
  * or a succeeding measure starts a new system.
+ *
+ * Layout group elements in a &lt;print&gt; element only apply to the current page,
+ * system, or staff. Music that follows continues to take the default values from
+ * the layout determined by the &lt;defaults&gt; element.
  */
 export interface Print {
   /**
@@ -18468,7 +19019,7 @@ export interface Measure {
   text?: MeasureTextValue[]
   /**
    * Measure width specified in tenths. These are the global tenths specified in the
-   * &lt;scaling&gt; element, not local tenths as modified by the &lt;staff-size&gt
+   * &lt;scaling&gt; element, not local tenths as modified by the &lt;staff-size&gt;
    * element. The width covers the entire measure from barline or system start to
    * barline or system end.
    */
@@ -18541,7 +19092,7 @@ export interface Measure {
  */
 export interface Part {
   /**
-   * An IDREF back to a &lt;score-part&gt; element within the &lt;part-list&gt
+   * An IDREF back to a &lt;score-part&gt; element within the &lt;part-list&gt;
    * element.
    */
   id: IDREFValue[]
@@ -18608,7 +19159,7 @@ export interface GroupAbbreviation {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -18631,6 +19182,9 @@ export interface GroupAbbreviation {
  * multi-font text in group abbreviations to the left of the system. The
  * print-object attribute can be used to determine what, if anything, is printed at
  * the start of each system.
+ *
+ * Formatting specified in the &lt;group-abbreviation-display&gt; element overrides
+ * formatting specified in the &lt;group-abbreviation&gt; element.
  */
 export interface GroupAbbreviationDisplay {
   /**
@@ -18660,7 +19214,7 @@ export interface GroupBarline {
    */
   color?: ColorValue[]
   /**
-   * {@link GroupBarlineValueValue
+   * {@link GroupBarlineValueValue}
    */
   v: GroupBarlineValueValue
 }
@@ -18669,7 +19223,7 @@ export interface GroupBarline {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-name
  *
- * The &lt;group-name&gt; element describes the name of a &lt;part-group&gt
+ * The &lt;group-name&gt; element describes the name of a &lt;part-group&gt;
  * element. The formatting attributes are deprecated as of Version 2.0 in favor of
  * the new &lt;group-name-display&gt; element.
  */
@@ -18722,7 +19276,7 @@ export interface GroupName {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -18745,6 +19299,9 @@ export interface GroupName {
  * multi-font text in group names to the left of the system. The print-object
  * attribute can be used to determine what, if anything, is printed at the start of
  * each system.
+ *
+ * Formatting specified in the &lt;group-name-display&gt; element overrides
+ * formatting specified in the &lt;group-name&gt; element.
  */
 export interface GroupNameDisplay {
   /**
@@ -18788,7 +19345,7 @@ export interface GroupSymbol {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left.
+   *  Positive x is right and negative x is left.
    */
   relativeX?: TenthsValue[]
   /**
@@ -18798,7 +19355,7 @@ export interface GroupSymbol {
    */
   relativeY?: TenthsValue[]
   /**
-   * {@link GroupSymbolValueValue
+   * {@link GroupSymbolValueValue}
    */
   v: GroupSymbolValueValue
 }
@@ -18822,6 +19379,14 @@ export interface GroupTime {}
  * &lt;part-group&gt; start element appears before the first &lt;score-part&gt; in
  * the group. The &lt;part-group&gt; stop element appears after the last
  * &lt;score-part&gt; in the group.
+ *
+ * As with parts, a &lt;part-group&gt; can have a name and abbreviation. Values for
+ * the child elements are ignored at the stop of a &lt;part-group&gt;.
+ *
+ * A &lt;part-group&gt; element is not needed for a single multi-staff part. By
+ * default, multi-staff parts include a brace symbol and (if appropriate given the
+ * &lt;bar-style&gt;) common barlines. The symbol formatting for a multi-staff part
+ * can be more fully specified using the &lt;part-symbol&gt; element.
  */
 export interface PartGroup {
   /**
@@ -18902,7 +19467,7 @@ export interface PartAbbreviation {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -18946,7 +19511,7 @@ export interface PartAbbreviation {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -18966,7 +19531,7 @@ export interface PartAbbreviation {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/group-link
  *
  * Multiple &lt;part-link&gt; elements can reference different types of linked
- * documents, such as parts and condensed score. The optional &lt;group-link&gt
+ * documents, such as parts and condensed score. The optional &lt;group-link&gt;
  * elements identify the groups used in the linked document. The content of a
  * &lt;group-link&gt; element should match the content of a &lt;group&gt; element
  * in the linked document.
@@ -19073,7 +19638,7 @@ export interface PartName {
    * Changes the computation of the default horizontal position. The origin is
    * changed relative to the left-hand side of the note or the musical position
    * within the bar. Positive x is right and negative x is left.<br><br>This
-   * attribute provides higher-resolution positioning data than the &lt;offset&gt
+   * attribute provides higher-resolution positioning data than the &lt;offset&gt;
    * element. Applications reading a MusicXML file that can understand both features
    * should generally rely on this attribute for its greater accuracy.
    */
@@ -19117,7 +19682,7 @@ export interface PartName {
   /**
    * Changes the horizontal position relative to the default position, either as
    * computed by the individual program, or as overridden by the default-x attribute.
-   * Positive x is right and negative x is left. It should be interpreted in the
+   *  Positive x is right and negative x is left. It should be interpreted in the
    * context of the &lt;offset&gt; element or directive attribute if those are
    * present.
    */
@@ -19147,7 +19712,7 @@ export interface PlayerName {
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/player
  *
- * The &lt;player&gt; element allows for multiple players per &lt;score-part&gt
+ * The &lt;player&gt; element allows for multiple players per &lt;score-part&gt;
  * for use in listening applications. One player may play multiple instruments,
  * while a single instrument may include multiple players in divisi sections.
  */
@@ -19192,6 +19757,16 @@ export interface InstrumentName {
  * &lt;score-part&gt;. As with the &lt;score-part&gt; element, each
  * &lt;score-instrument&gt; has a required ID attribute, a name, and an optional
  * abbreviation.
+ *
+ * A &lt;score-instrument&gt; element is also required if the score specifies MIDI
+ * 1.0 channels, banks, or programs. An initial &lt;midi-instrument&gt; assignment
+ * can also be made here. MusicXML software should be able to automatically assign
+ * reasonable channels and instruments without these elements in simple cases, such
+ * as where part names match General MIDI instrument names.
+ *
+ * The &lt;score-instrument&gt; element can also distinguish multiple instruments
+ * of the same type that are on the same part, such as Clarinet 1 and Clarinet 2
+ * instruments within a Clarinets 1 and 2 part.
  */
 export interface ScoreInstrument {
   /**
@@ -19290,6 +19865,11 @@ export interface ScorePart {
  * document. Each part has an ID that is used later within the musical data. Since
  * parts may be encoded separately and combined later, identification elements are
  * present at both the score and &lt;score-part&gt; levels.
+ *
+ * There must be at least one &lt;score-part&gt;, combined as desired with
+ * &lt;part-group&gt; elements that indicate braces and brackets. Parts are ordered
+ * from top to bottom in a score based on the order in which they appear in the
+ * &lt;part-list&gt;.
  */
 export interface PartList {
   /**
@@ -19404,7 +19984,7 @@ export interface Work {
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/score-partwise
  *
  * The &lt;score-partwise&gt; element is the root element for a partwise MusicXML
- * score. It includes score header information followed by a series of &lt;part&gt
+ * score. It includes score header information followed by a series of &lt;part&gt;
  * elements with &lt;measure&gt; elements inside.
  */
 export interface ScorePartwise {
@@ -19457,6 +20037,8 @@ export interface ScorePartwise {
  *
  * The above-below type is used to indicate whether one element appears above or
  * below another element.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type AboveBelowValue = string
 
@@ -19478,6 +20060,8 @@ export type AboveBelowValue = string
  * Music Font Layout (SMuFL) accidental. The smufl attribute may be used with any
  * accidental value to help specify the appearance of symbols that share the same
  * MusicXML semantics.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type AccidentalValueValue = string
 
@@ -19488,6 +20072,12 @@ export type AccidentalValueValue = string
  * The accordion-middle type may have values of 1, 2, or 3, corresponding to having
  * 1 to 3 dots in the middle section of the accordion registration symbol. This
  * type is not used if no dots are present.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 3
  */
 export type AccordionMiddleValue = string
 
@@ -19506,6 +20096,8 @@ export type AnyURIValue = string
  *
  * The arrow-direction type represents the direction in which an arrow points,
  * using Unicode arrow terminology.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type ArrowDirectionValue = string
 
@@ -19518,6 +20110,8 @@ export type ArrowDirectionValue = string
  * arrows are duplicate single arrows in the same direction. Combined arrows apply
  * to double direction arrows like left right, indicating that an arrow in one
  * direction should be combined with an arrow in the other direction.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type ArrowStyleValue = string
 
@@ -19528,6 +20122,8 @@ export type ArrowStyleValue = string
  * The backward-forward type is used to specify repeat directions. The start of the
  * repeat has a forward direction while the end of the repeat has a backward
  * direction.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type BackwardForwardValue = string
 
@@ -19539,6 +20135,8 @@ export type BackwardForwardValue = string
  * dotted, dashed, heavy, light-light, light-heavy, heavy-light, heavy-heavy, tick
  * (a short stroke through the top line), short (a partial barline between the 2nd
  * and 4th lines), and none.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type BarStyleValue = string
 
@@ -19550,6 +20148,12 @@ export type BarStyleValue = string
  * the number-level type, the beam-level type identifies concurrent beams in a beam
  * group. It does not distinguish overlapping beams such as grace notes within
  * regular notes, or beams used in different voices.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 8
  */
 export type BeamLevelValue = string
 
@@ -19559,6 +20163,8 @@ export type BeamLevelValue = string
  *
  * The beam-value type represents the type of beam associated with each of 8 beam
  * levels (up to 1024th notes) available for each note.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type BeamValueValue = string
 
@@ -19568,6 +20174,8 @@ export type BeamValueValue = string
  *
  * The beater-value type represents pictograms for beaters, mallets, and sticks
  * that do not have different materials represented in the pictogram.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type BeaterValueValue = string
 
@@ -19578,6 +20186,8 @@ export type BeaterValueValue = string
  * The bend-shape type distinguishes between the angled bend symbols commonly used
  * in standard notation and the curved bend symbols commonly used in both tablature
  * and standard notation.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type BendShapeValue = string
 
@@ -19586,6 +20196,8 @@ export type BendShapeValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/breath-mark-value
  *
  * The breath-mark-value type represents the symbol used for a breath mark.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type BreathMarkValueValue = string
 
@@ -19594,6 +20206,8 @@ export type BreathMarkValueValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/caesura-value
  *
  * The caesura-value type represents the shape of the caesura sign.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type CaesuraValueValue = string
 
@@ -19606,6 +20220,8 @@ export type CaesuraValueValue = string
  * the barline and to the left. It is left if not specified. For mid-measure key
  * elements, a cancel-location of before-barline should be treated like a
  * cancel-location of left.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type CancelLocationValue = string
 
@@ -19615,6 +20231,8 @@ export type CancelLocationValue = string
  *
  * The circular-arrow type represents the direction in which a circular arrow
  * points, using Unicode arrow terminology.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type CircularArrowValue = string
 
@@ -19623,6 +20241,8 @@ export type CircularArrowValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/clef-sign
  *
  * The clef-sign type represents the different clef symbols.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type ClefSignValue = string
 
@@ -19632,13 +20252,17 @@ export type ClefSignValue = string
  *
  * The color type indicates the color of an element. Color may be represented as
  * hexadecimal RGB triples, as in HTML, or as hexadecimal ARGB tuples, with the A
- * indicating alpha of transparency. An alpha value of 00 is totally transparent
+ * indicating alpha of transparency. An alpha value of 00 is totally transparent;
  * FF is totally opaque. If RGB is used, the A value is assumed to be
  * FF.<br><br>For instance, the RGB value "#800080" represents purple. An ARGB
  * value of "#40800080" would be a transparent purple.<br><br>As in <a
  * href="https://www.w3.org/TR/SVG11/color.html">SVG 1.1</a>, colors are defined in
  * terms of the <a href="https://www.color.org/srgb04.xalter">sRGB</a> color space
  * (IEC 61966).
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
+ *
+ * Regex pattern: <b>#[\dA-F]{6}([\dA-F][\dA-F])?</b>
  */
 export type ColorValue = string
 
@@ -19654,7 +20278,13 @@ export type CommaSeparatedTextValue = string
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/css-font-size
  *
+ * The css-font-size type includes the <a
+ * href="https://www.w3.org/TR/css-fonts-3/#font-size-prop">CSS font sizes</a> used
+ * as an alternative to a numeric point size. In CSS these refer to an entry in a
+ * table of font sizes computed and kept by the user agent. The scaling is relative
+ * to the reference value of medium.
  *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type CssFontSizeValue = string
 
@@ -19680,6 +20310,8 @@ export type DecimalValue = string
  *
  * The degree-symbol-value type indicates which symbol should be used in specifying
  * a degree.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type DegreeSymbolValueValue = string
 
@@ -19690,6 +20322,8 @@ export type DegreeSymbolValueValue = string
  * The degree-type-value type indicates whether the current degree element is an
  * addition, alteration, or subtraction to the kind of the current chord in the
  * harmony element.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type DegreeTypeValueValue = string
 
@@ -19699,6 +20333,16 @@ export type DegreeTypeValueValue = string
  *
  * The distance-type defines what type of distance is being defined in a
  * &lt;distance&gt; element. Values include:
+ *
+ * <li>beam</li><li>hyphen</li>
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type DistanceTypeValue = string
 
@@ -19709,6 +20353,8 @@ export type DistanceTypeValue = string
  * The divisions type is used to express values in terms of the musical divisions
  * defined by the divisions element. It is preferred that these be integer values
  * both for MIDI interoperability and to avoid roundoff errors.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
  */
 export type DivisionsValue = string
 
@@ -19719,6 +20365,8 @@ export type DivisionsValue = string
  * The effect-value type represents pictograms for sound effect percussion
  * instruments. The cannon, lotus flute, and megaphone values are in addition to
  * Stone's list.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type EffectValueValue = string
 
@@ -19730,6 +20378,8 @@ export type EffectValueValue = string
  * enclosure around text or symbols. A bracket enclosure is similar to a rectangle
  * with the bottom line missing, as is common in jazz notation. An inverted-bracket
  * enclosure is similar to a rectangle with the top line missing.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type EnclosureShapeValue = string
 
@@ -19742,6 +20392,10 @@ export type EnclosureShapeValue = string
  * is used for the number attribute of the &lt;ending&gt; element. The zero or more
  * spaces version is used when software knows that an ending is present, but cannot
  * determine the type of the ending.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
+ *
+ * Regex pattern: <b>([ ]*)|([1-9][0-9]*(, ?[1-9][0-9]*)*)</b>
  */
 export type EndingNumberValue = string
 
@@ -19751,6 +20405,8 @@ export type EndingNumberValue = string
  *
  * The fan type represents the type of beam fanning present on a note, used to
  * represent accelerandos and ritardandos.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type FanValue = string
 
@@ -19759,6 +20415,8 @@ export type FanValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/fermata-shape
  *
  * The fermata-shape type represents the shape of the fermata sign.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type FermataShapeValue = string
 
@@ -19770,6 +20428,8 @@ export type FermataShapeValue = string
  * signature. Negative numbers are used for flats and positive numbers for sharps,
  * reflecting the key's placement within the circle of fifths (hence the type
  * name).
+ *
+ * Base type: <a href="../xsd-integer/index.html">integer</a>
  */
 export type FifthsValue = string
 
@@ -19783,6 +20443,8 @@ export type FifthsValue = string
  * fantasy, and monospace. The music, engraved, and handwritten values refer to
  * music fonts; the rest refer to text fonts. The fantasy style refers to
  * decorative text such as found in older German-style printing.
+ *
+ * Base type: <a href="../comma-separated-text/index.html">comma-separated-text</a>
  */
 export type FontFamilyValue = string
 
@@ -19802,6 +20464,8 @@ export type FontSizeValue = string
  * The font-style type represents a simplified version of the <a
  * href="https://www.w3.org/TR/2018/REC-css-fonts-3-20180920/#font-prop-desc">CSS
  * font-style property</a>.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type FontStyleValue = string
 
@@ -19812,6 +20476,8 @@ export type FontStyleValue = string
  * The font-weight type represents a simplified version of the <a
  * href="https://www.w3.org/TR/2018/REC-css-fonts-3-20180920/#font-prop-desc">CSS
  * font-weight property</a>.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type FontWeightValue = string
 
@@ -19820,6 +20486,8 @@ export type FontWeightValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/glass-value
  *
  * The glass-value type represents pictograms for glass percussion instruments.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type GlassValueValue = string
 
@@ -19827,8 +20495,30 @@ export type GlassValueValue = string
 /**
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/glyph-type
  *
- * The glyph-type defines what type of glyph is being defined in a &lt;glyph&gt
+ * The glyph-type defines what type of glyph is being defined in a &lt;glyph&gt;
  * element. Values include:
+ *
+ * <li>quarter-rest</li><li>g-clef-ottava-bassa</li><li>c-clef</li><li>f-clef</li><li>percussion-clef</li><li>octave-shift-up-8</li><li>octave-shift-down-8</li><li>octave-shift-continue-8</li><li>octave-shift-down-15</li><li>octave-shift-up-15</li><li>octave-shift-continue-15</li><li>octave-shift-down-22</li><li>octave-shift-up-22</li><li>octave-shift-continue-22</li>
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type GlyphTypeValue = string
 
@@ -19837,6 +20527,8 @@ export type GlyphTypeValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/group-barline-value
  *
  * The group-barline-value type indicates if the group should have common barlines.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type GroupBarlineValueValue = string
 
@@ -19846,6 +20538,8 @@ export type GroupBarlineValueValue = string
  *
  * The group-symbol-value type indicates how the symbol for a group or multi-staff
  * part is indicated in the score.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type GroupSymbolValueValue = string
 
@@ -19854,6 +20548,8 @@ export type GroupSymbolValueValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/handbell-value
  *
  * The handbell-value type represents the type of handbell technique being notated.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type HandbellValueValue = string
 
@@ -19863,6 +20559,8 @@ export type HandbellValueValue = string
  *
  * The harmon-closed-location type indicates which portion of the symbol is filled
  * in when the corresponding harmon-closed-value is half.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type HarmonClosedLocationValue = string
 
@@ -19872,6 +20570,8 @@ export type HarmonClosedLocationValue = string
  *
  * The harmon-closed-value type represents whether the harmon mute is closed, open,
  * or half-open.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type HarmonClosedValueValue = string
 
@@ -19884,6 +20584,8 @@ export type HarmonClosedValueValue = string
  * second element appears to the right of the first. The vertical value specifies
  * that the second element appears below the first. The diagonal value specifies
  * that the second element appears both below and to the right of the first.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type HarmonyArrangementValue = string
 
@@ -19893,6 +20595,8 @@ export type HarmonyArrangementValue = string
  *
  * The harmony-type type differentiates different types of harmonies when alternate
  * harmonies are possible.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type HarmonyTypeValue = string
 
@@ -19902,6 +20606,8 @@ export type HarmonyTypeValue = string
  *
  * The hole-closed-location type indicates which portion of the hole is filled in
  * when the corresponding hole-closed-value is half.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type HoleClosedLocationValue = string
 
@@ -19911,6 +20617,8 @@ export type HoleClosedLocationValue = string
  *
  * The hole-closed-value type represents whether the hole is closed, open, or
  * half-open.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type HoleClosedValueValue = string
 
@@ -19948,6 +20656,8 @@ export type IntegerValue = string
  * A kind-value indicates the type of chord. Degree elements can then add,
  * subtract, or alter from these starting points. The 11th and 13th values are
  * usually used as a basis for alteration.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type KindValueValue = string
 
@@ -19957,6 +20667,8 @@ export type KindValueValue = string
  *
  * The left-center-right type is used to define horizontal alignment and text
  * justification.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LeftCenterRightValue = string
 
@@ -19966,6 +20678,8 @@ export type LeftCenterRightValue = string
  *
  * The left-right type is used to indicate whether one element appears to the left
  * or the right of another element.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LeftRightValue = string
 
@@ -19975,6 +20689,8 @@ export type LeftRightValue = string
  *
  * The line-end type specifies if there is a jog up or down (or both), an arrow, or
  * nothing at the start or end of a bracket.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LineEndValue = string
 
@@ -19984,6 +20700,8 @@ export type LineEndValue = string
  *
  * The line-length type distinguishes between different line lengths for doit,
  * falloff, plop, and scoop articulations.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LineLengthValue = string
 
@@ -19992,6 +20710,8 @@ export type LineLengthValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/line-shape
  *
  * The line-shape type distinguishes between straight and curved lines.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LineShapeValue = string
 
@@ -20000,6 +20720,8 @@ export type LineShapeValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/line-type
  *
  * The line-type type distinguishes between solid, dashed, dotted, and wavy lines.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LineTypeValue = string
 
@@ -20009,6 +20731,16 @@ export type LineTypeValue = string
  *
  * The line-width-type defines what type of line is being defined in a
  * &lt;line-width&gt; element. Values include:
+ *
+ * <li>beam</li><li>bracket</li><li>dashes</li><li>enclosure</li><li>ending</li><li>extend</li><li>heavy
+ * barline</li><li>leger</li><li>light barline</li><li>octave
+ * shift</li><li>pedal</li><li>slur middle</li><li>slur
+ * tip</li><li>staff</li><li>stem</li><li>tie middle</li><li>tie tip</li><li>tuplet
+ * bracket</li><li>wedge </li>
+ *
+ *
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type LineWidthTypeValue = string
 
@@ -20018,6 +20750,8 @@ export type LineWidthTypeValue = string
  *
  * The margin-type type specifies whether margins apply to even page, odd pages, or
  * both.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type MarginTypeValue = string
 
@@ -20027,6 +20761,8 @@ export type MarginTypeValue = string
  *
  * The measure-numbering-value type describes how measure numbers are displayed on
  * this part: no numbers, numbers every measure, or numbers every system.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type MeasureNumberingValueValue = string
 
@@ -20037,6 +20773,10 @@ export type MeasureNumberingValueValue = string
  * The measure-text type is used for the text attribute of measure elements. It has
  * at least one character. The implicit attribute of the measure element should be
  * set to "yes" rather than setting the text attribute to an empty string.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
+ *
+ * Minimum length: <b>1</b>
  */
 export type MeasureTextValue = string
 
@@ -20046,6 +20786,8 @@ export type MeasureTextValue = string
  *
  * The membrane-value type represents pictograms for membrane percussion
  * instruments.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type MembraneValueValue = string
 
@@ -20056,6 +20798,8 @@ export type MembraneValueValue = string
  * The metal-value type represents pictograms for metal percussion instruments. The
  * hi-hat value refers to a pictogram like high-hat cymbals, but without the long
  * vertical line at the bottom.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type MetalValueValue = string
 
@@ -20066,6 +20810,12 @@ export type MetalValueValue = string
  * The midi-128 type is used to express MIDI 1.0 values that range from 1 to 128.
  * MusicXML uses 1-based numbers rather than 0-based numbers often found in MIDI
  * 1.0 documentation.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 128
  */
 export type Midi128Value = string
 
@@ -20074,6 +20824,12 @@ export type Midi128Value = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/midi-16
  *
  * The midi-16 type is used to express MIDI 1.0 values that range from 1 to 16.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 16
  */
 export type Midi16Value = string
 
@@ -20084,6 +20840,12 @@ export type Midi16Value = string
  * The midi-16384 type is used to express MIDI 1.0 values that range from 1 to
  * 16,384. MusicXML uses 1-based numbers rather than 0-based numbers often found in
  * MIDI 1.0 documentation.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 16384
  */
 export type Midi16384Value = string
 
@@ -20094,6 +20856,8 @@ export type Midi16384Value = string
  * The millimeters type is a number representing millimeters. This is used in the
  * &lt;scaling&gt; element to provide a default scaling from tenths to physical
  * units.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
  */
 export type MillimetersValue = string
 
@@ -20102,6 +20866,8 @@ export type MillimetersValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/milliseconds
  *
  * The milliseconds type represents an integral number of milliseconds.
+ *
+ * Base type: <a href="../xsd-nonNegativeInteger/index.html">nonNegativeInteger</a>
  */
 export type MillisecondsValue = string
 
@@ -20112,6 +20878,8 @@ export type MillisecondsValue = string
  * The mode type is used to specify major/minor and other mode distinctions. Valid
  * mode values include major, minor, dorian, phrygian, lydian, mixolydian, aeolian,
  * ionian, locrian, and none.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type ModeValue = string
 
@@ -20122,6 +20890,8 @@ export type ModeValue = string
  * The mute type represents muting playback for different instruments, including
  * brass, winds, and strings. The on and off values are used for undifferentiated
  * mutes. The remaining values represent specific mutes.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type MuteValue = string
 
@@ -20139,6 +20909,10 @@ export type NMTOKENValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/non-negative-decimal
  *
  * The non-negative-decimal type specifies a non-negative decimal value.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
+ *
+ * Minimum allowed value: 0
  */
 export type NonNegativeDecimalValue = string
 
@@ -20158,6 +20932,8 @@ export type NonNegativeIntegerValue = string
  *
  * The note-size-type type indicates the type of note size being defined by a
  * &lt;note-size&gt; element.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type NoteSizeTypeValue = string
 
@@ -20167,6 +20943,8 @@ export type NoteSizeTypeValue = string
  *
  * The note-type-value type is used for the MusicXML type element and represents
  * the graphic note type, from 1024th (shortest) to maxima (longest).
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type NoteTypeValueValue = string
 
@@ -20190,6 +20968,8 @@ export type NoteTypeValueValue = string
  * MusicXML semantics. Noteheads in the SMuFL Note name noteheads and Note name
  * noteheads supplement ranges (U+E150–U+E1AF and U+EEE0–U+EEFF) should not use the
  * smufl attribute or the "other" value, but instead use the notehead-text element.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type NoteheadValueValue = string
 
@@ -20226,6 +21006,12 @@ export type NoteheadValueValue = string
  * and stop in an arbitrary order. Because the start and stop values refer to
  * musical score order, a program may find the stopping point of an object earlier
  * in the MusicXML document than it will find its starting point.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 16
  */
 export type NumberLevelValue = string
 
@@ -20235,6 +21021,12 @@ export type NumberLevelValue = string
  *
  * The number-of-lines type is used to specify the number of lines in text
  * decoration attributes.
+ *
+ * Base type: <a href="../xsd-nonNegativeInteger/index.html">nonNegativeInteger</a>
+ *
+ * Minimum allowed value: 0
+ *
+ * Maximum allowed value: 3
  */
 export type NumberOfLinesValue = string
 
@@ -20257,6 +21049,8 @@ export type NumberOrNormalValue = string
  * minor value sharpens the 7 and the melodic minor value sharpens both 6 and 7. If
  * a minor mode is used without qualification, either in the &lt;mode&gt; or
  * &lt;numeral-mode&gt; elements, natural minor is used.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type NumeralModeValue = string
 
@@ -20266,6 +21060,12 @@ export type NumeralModeValue = string
  *
  * The numeral-value type represents a Roman numeral or Nashville number value as a
  * positive integer from 1 to 7.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
+ *
+ * Minimum allowed value: 1
+ *
+ * Maximum allowed value: 7
  */
 export type NumeralValueValue = string
 
@@ -20275,6 +21075,12 @@ export type NumeralValueValue = string
  *
  * Octaves are represented by the numbers 0 to 9, where 4 indicates the octave
  * started by middle C.
+ *
+ * Base type: <a href="../xsd-integer/index.html">integer</a>
+ *
+ * Minimum allowed value: 0
+ *
+ * Maximum allowed value: 9
  */
 export type OctaveValue = string
 
@@ -20283,6 +21089,8 @@ export type OctaveValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/on-off
  *
  * The on-off type is used for notation elements such as string mutes.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type OnOffValue = string
 
@@ -20292,6 +21100,8 @@ export type OnOffValue = string
  *
  * The over-under type is used to indicate whether the tips of curved lines such as
  * slurs and ties are overhand (tips down) or underhand (tips up).
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type OverUnderValue = string
 
@@ -20300,6 +21110,8 @@ export type OverUnderValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/pedal-type
  *
  * The pedal-type distinguishes types of pedal directions.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type PedalTypeValue = string
 
@@ -20308,6 +21120,12 @@ export type PedalTypeValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/percent
  *
  * The percent type specifies a percentage from 0 to 100.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
+ *
+ * Minimum allowed value: 0
+ *
+ * Maximum allowed value: 100
  */
 export type PercentValue = string
 
@@ -20318,6 +21136,8 @@ export type PercentValue = string
  * The pitched-value type represents pictograms for pitched percussion instruments.
  * The chimes and tubular chimes values distinguish the single-line and double-line
  * versions of the pictogram.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type PitchedValueValue = string
 
@@ -20326,6 +21146,10 @@ export type PitchedValueValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/positive-divisions
  *
  * The positive-divisions type restricts divisions values to positive numbers.
+ *
+ * Base type: <a href="../divisions/index.html">divisions</a>
+ *
+ * Minimum allowed value: &gt; 0
  */
 export type PositiveDivisionsValue = string
 
@@ -20353,6 +21177,8 @@ export type PositiveIntegerValue = string
  *
  * The principal-voice-symbol type represents the type of symbol used to indicate a
  * principal or secondary voice.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type PrincipalVoiceSymbolValue = string
 
@@ -20361,6 +21187,8 @@ export type PrincipalVoiceSymbolValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/right-left-middle
  *
  * The right-left-middle type is used to specify barline location.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type RightLeftMiddleValue = string
 
@@ -20370,6 +21198,12 @@ export type RightLeftMiddleValue = string
  *
  * The rotation-degrees type specifies rotation, pan, and elevation values in
  * degrees. Values range from -180 to 180.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
+ *
+ * Minimum allowed value: -180
+ *
+ * Maximum allowed value: 180
  */
 export type RotationDegreesValue = string
 
@@ -20379,6 +21213,8 @@ export type RotationDegreesValue = string
  *
  * The semi-pitched type represents categories of indefinite pitch for percussion
  * instruments.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type SemiPitchedValue = string
 
@@ -20389,6 +21225,8 @@ export type SemiPitchedValue = string
  * The semitones type is a number representing semitones, used for chromatic
  * alteration. A value of -1 corresponds to a flat and a value of 1 to a sharp.
  * Decimal values like 0.5 (quarter tone sharp) are used for microtones.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
  */
 export type SemitonesValue = string
 
@@ -20398,6 +21236,8 @@ export type SemitonesValue = string
  *
  * The show-frets type indicates whether to show tablature frets as numbers (0, 1,
  * 2) or letters (a, b, c). The default choice is numbers.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type ShowFretsValue = string
 
@@ -20408,6 +21248,8 @@ export type ShowFretsValue = string
  * The show-tuplet type indicates whether to show a part of a tuplet relating to
  * the tuplet-actual element, both the tuplet-actual and tuplet-normal elements, or
  * neither.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type ShowTupletValue = string
 
@@ -20419,6 +21261,11 @@ export type ShowTupletValue = string
  * Music Font Layout (SMuFL) accidental character. The value is a SMuFL canonical
  * glyph name that starts with one of the strings used at the start of glyph names
  * for SMuFL accidentals.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern:
+ * <b>(acc|medRenFla|medRenNatura|medRenShar|kievanAccidental)(\c+)</b>
  */
 export type SmuflAccidentalGlyphNameValue = string
 
@@ -20429,6 +21276,10 @@ export type SmuflAccidentalGlyphNameValue = string
  * The smufl-coda-glyph-name type is used to reference a specific Standard Music
  * Font Layout (SMuFL) coda character. The value is a SMuFL canonical glyph name
  * that starts with coda.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern: <b>coda\c*</b>
  */
 export type SmuflCodaGlyphNameValue = string
 
@@ -20440,6 +21291,8 @@ export type SmuflCodaGlyphNameValue = string
  * Standard Music Font Layout (SMuFL) character. The value is a SMuFL canonical
  * glyph name, not a code point. For instance, the value for a standard piano pedal
  * mark would be keyboardPedalPed, not U+E650.
+ *
+ * Base type: <a href="../xsd-NMTOKEN/index.html">NMTOKEN</a>
  */
 export type SmuflGlyphNameValue = string
 
@@ -20450,6 +21303,10 @@ export type SmuflGlyphNameValue = string
  * The smufl-lyrics-glyph-name type is used to reference a specific Standard Music
  * Font Layout (SMuFL) lyrics elision character. The value is a SMuFL canonical
  * glyph name that starts with lyrics.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern: <b>lyrics\c+</b>
  */
 export type SmuflLyricsGlyphNameValue = string
 
@@ -20460,6 +21317,10 @@ export type SmuflLyricsGlyphNameValue = string
  * The smufl-pictogram-glyph-name type is used to reference a specific Standard
  * Music Font Layout (SMuFL) percussion pictogram character. The value is a SMuFL
  * canonical glyph name that starts with pict.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern: <b>pict\c+</b>
  */
 export type SmuflPictogramGlyphNameValue = string
 
@@ -20470,6 +21331,10 @@ export type SmuflPictogramGlyphNameValue = string
  * The smufl-segno-glyph-name type is used to reference a specific Standard Music
  * Font Layout (SMuFL) segno character. The value is a SMuFL canonical glyph name
  * that starts with segno.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern: <b>segno\c*</b>
  */
 export type SmuflSegnoGlyphNameValue = string
 
@@ -20482,6 +21347,10 @@ export type SmuflSegnoGlyphNameValue = string
  * glyph name that either starts with wiggle, or begins with guitar and ends with
  * VibratoStroke. This includes all the glyphs in the Multi-segment lines range,
  * excluding the beam glyphs.
+ *
+ * Base type: <a href="../smufl-glyph-name/index.html">smufl-glyph-name</a>
+ *
+ * Regex pattern: <b>(wiggle\c+)|(guitar\c*VibratoStroke)</b>
  */
 export type SmuflWavyLineGlyphNameValue = string
 
@@ -20492,6 +21361,8 @@ export type SmuflWavyLineGlyphNameValue = string
  * The staff-divide-symbol type is used for staff division symbols. The down, up,
  * and up-down values correspond to SMuFL code points U+E00B, U+E00C, and U+E00D
  * respectively.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StaffDivideSymbolValue = string
 
@@ -20501,6 +21372,8 @@ export type StaffDivideSymbolValue = string
  *
  * The staff-line type indicates the line on a given staff. Staff lines are
  * numbered from bottom to top, with 1 being the bottom line on a staff.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
  */
 export type StaffLineValue = string
 
@@ -20512,6 +21385,8 @@ export type StaffLineValue = string
  * lines are numbered from bottom to top, with 1 being the bottom line on a staff.
  * A staff-line-position value can extend beyond the range of the lines on the
  * current staff.
+ *
+ * Base type: <a href="../xsd-integer/index.html">integer</a>
  */
 export type StaffLinePositionValue = string
 
@@ -20521,6 +21396,8 @@ export type StaffLinePositionValue = string
  *
  * The staff-number type indicates staff numbers within a multi-staff part. Staves
  * are numbered from top to bottom, with 1 being the top staff on a part.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
  */
 export type StaffNumberValue = string
 
@@ -20529,6 +21406,8 @@ export type StaffNumberValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/staff-type
  *
  * The staff-type value specifies different uses for the staff.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StaffTypeValue = string
 
@@ -20538,6 +21417,8 @@ export type StaffTypeValue = string
  *
  * The start-note type describes the starting note of trills and mordents for
  * playback, relative to the current note.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StartNoteValue = string
 
@@ -20555,6 +21436,8 @@ export type StartNoteValue = string
  * document.<br><br>When multiple elements with the same tag are used within the
  * same note, their order within the MusicXML document should match the musical
  * score order.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StartStopValue = string
 
@@ -20576,6 +21459,8 @@ export type StartStopValue = string
  * score order. For example, a note that marks both the end of one slur and the
  * start of a new slur should have the incoming slur element with a type of stop
  * precede the outgoing slur element with a type of start.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StartStopContinueValue = string
 
@@ -20584,6 +21469,8 @@ export type StartStopContinueValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/start-stop-discontinue
  *
  * The start-stop-discontinue type is used to specify &lt;ending&gt; types.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StartStopDiscontinueValue = string
 
@@ -20596,6 +21483,8 @@ export type StartStopDiscontinueValue = string
  * groupings.<br><br>When multiple elements with the same tag are used within the
  * same note, their order within the MusicXML document should match the musical
  * score order.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type StartStopSingleValue = string
 
@@ -20604,6 +21493,8 @@ export type StartStopSingleValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/stem-value
  *
  * The stem-value type represents the notated stem direction.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StemValueValue = string
 
@@ -20613,6 +21504,8 @@ export type StemValueValue = string
  *
  * The step type represents a step of the diatonic scale, represented using the
  * English letters A through G.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StepValue = string
 
@@ -20622,6 +21515,8 @@ export type StepValue = string
  *
  * The stick-location type represents pictograms for the location of sticks,
  * beaters, or mallets on cymbals, gongs, drums, and other instruments.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StickLocationValue = string
 
@@ -20631,6 +21526,8 @@ export type StickLocationValue = string
  *
  * The stick-material type represents the material being displayed in a stick
  * pictogram.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StickMaterialValue = string
 
@@ -20640,6 +21537,8 @@ export type StickMaterialValue = string
  *
  * The stick-type type represents the shape of pictograms where the material in the
  * stick, mallet, or beater is represented in the pictogram.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type StickTypeValue = string
 
@@ -20658,6 +21557,8 @@ export type StringValue = string
  *
  * The string-number type indicates a string number. Strings are numbered from high
  * to low, with 1 being the highest pitched full-length string.
+ *
+ * Base type: <a href="../xsd-positiveInteger/index.html">positiveInteger</a>
  */
 export type StringNumberValue = string
 
@@ -20667,6 +21568,8 @@ export type StringNumberValue = string
  *
  * The swing-type-value type specifies the note type, either eighth or 16th, to
  * which the ratio defined in the &lt;swing&gt; element is applied.
+ *
+ * Base type: <a href="../note-type-value/index.html">note-type-value</a>
  */
 export type SwingTypeValueValue = string
 
@@ -20677,6 +21580,8 @@ export type SwingTypeValueValue = string
  * Lyric hyphenation is indicated by the syllabic type. The single, begin, end, and
  * middle values represent single-syllable words, word-beginning syllables,
  * word-ending syllables, and mid-word syllables, respectively.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type SyllabicValue = string
 
@@ -20686,6 +21591,8 @@ export type SyllabicValue = string
  *
  * The symbol-size type is used to distinguish between full, cue sized, grace cue
  * sized, and oversized symbols.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type SymbolSizeValue = string
 
@@ -20695,6 +21602,8 @@ export type SymbolSizeValue = string
  *
  * The sync-type type specifies the style that a score following application should
  * use to synchronize an accompaniment with a performer.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type SyncTypeValue = string
 
@@ -20704,6 +21613,9 @@ export type SyncTypeValue = string
  *
  * The system-relation type distinguishes elements that are associated with a
  * system rather than the particular part where the element appears.
+ *
+ * Base type: <a
+ * href="../system-relation-number/index.html">system-relation-number</a>
  */
 export type SystemRelationValue = string
 
@@ -20714,6 +21626,8 @@ export type SystemRelationValue = string
  * The system-relation-number type distinguishes measure numbers that are
  * associated with a system rather than the particular part where the element
  * appears.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type SystemRelationNumberValue = string
 
@@ -20724,6 +21638,8 @@ export type SystemRelationNumberValue = string
  * The tap-hand type represents the symbol to use for a tap element. The left and
  * right values refer to the SMuFL guitarLeftHandTapping and guitarRightHandTapping
  * glyphs respectively.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type TapHandValue = string
 
@@ -20741,6 +21657,8 @@ export type TapHandValue = string
  * or attribute refers to tenths, it means the global tenths defined by the
  * &lt;scaling&gt; element, not the local tenths as adjusted by the
  * &lt;staff-size&gt; element.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
  */
 export type TenthsValue = string
 
@@ -20752,6 +21670,8 @@ export type TenthsValue = string
  * text algorithm, similar to the Directionality data category in the <a
  * href="https://www.w3.org/TR/2007/REC-its-20070403/#directionality">W3C
  * Internationalization Tag Set recommendation</a>.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TextDirectionValue = string
 
@@ -20769,6 +21689,8 @@ export type TextDirectionValue = string
  * note, one start and one stop.<br><br>In start-stop cases, ties can add more
  * elements using a continue type. This is typically used to specify the formatting
  * of cross-system ties.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TiedTypeValue = string
 
@@ -20781,6 +21703,10 @@ export type TiedTypeValue = string
  * section. The value is a comma-separated list of positive integers arranged in
  * ascending order, indicating which times through the repeated section that the
  * element applies.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
+ *
+ * Regex pattern: <b>[1-9][0-9]*(, ?[1-9][0-9]*)*</b>
  */
 export type TimeOnlyValue = string
 
@@ -20790,6 +21716,8 @@ export type TimeOnlyValue = string
  *
  * The time-relation type indicates the symbol used to represent the
  * interchangeable aspect of dual time signatures.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type TimeRelationValue = string
 
@@ -20805,6 +21733,8 @@ export type TimeRelationValue = string
  * line. The none value represents no separator with the beats and beat-type
  * arranged vertically. The adjacent value represents no separator with the beats
  * and beat-type arranged horizontally.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TimeSeparatorValue = string
 
@@ -20821,6 +21751,8 @@ export type TimeSeparatorValue = string
  * &lt;beat-type&gt; should be represented with a dotted downstem note that
  * corresponds to three times the &lt;beat-type&gt; value, and a numerator that is
  * one third the &lt;beats&gt; value.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TimeSymbolValue = string
 
@@ -20830,6 +21762,8 @@ export type TimeSymbolValue = string
  *
  * The tip-direction type represents the direction in which the tip of a stick or
  * beater points, using Unicode arrow terminology.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type TipDirectionValue = string
 
@@ -20848,6 +21782,8 @@ export type TokenValue = string
  *
  * The top-bottom type is used to indicate the top or bottom part of a vertical
  * shape like non-arpeggiate.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TopBottomValue = string
 
@@ -20857,6 +21793,12 @@ export type TopBottomValue = string
  *
  * The number of tremolo marks is represented by a number from 0 to 8: the same as
  * beam-level with 0 added.
+ *
+ * Base type: <a href="../xsd-integer/index.html">integer</a>
+ *
+ * Minimum allowed value: 0
+ *
+ * Maximum allowed value: 8
  */
 export type TremoloMarksValue = string
 
@@ -20866,6 +21808,8 @@ export type TremoloMarksValue = string
  *
  * The tremolo-type is used to distinguish double-note, single-note, and unmeasured
  * tremolos.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TremoloTypeValue = string
 
@@ -20875,6 +21819,10 @@ export type TremoloTypeValue = string
  *
  * The trill-beats type specifies the beats used in a trill-sound or bend-sound
  * attribute group. It is a decimal value with a minimum value of 2.
+ *
+ * Base type: <a href="../xsd-decimal/index.html">decimal</a>
+ *
+ * Minimum allowed value: 2
  */
 export type TrillBeatsValue = string
 
@@ -20884,6 +21832,8 @@ export type TrillBeatsValue = string
  *
  * The trill-step type describes the alternating note of trills and mordents for
  * playback, relative to the current note.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TrillStepValue = string
 
@@ -20893,6 +21843,8 @@ export type TrillStepValue = string
  *
  * The two-note-turn type describes the ending notes of trills and mordents for
  * playback, relative to the current note.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type TwoNoteTurnValue = string
 
@@ -20902,6 +21854,8 @@ export type TwoNoteTurnValue = string
  *
  * The up-down type is used for the direction of arrows and other pointed symbols
  * like vertical accents, indicating which way the tip is pointing.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type UpDownValue = string
 
@@ -20912,6 +21866,8 @@ export type UpDownValue = string
  * The up-down-stop-continue type is used for octave-shift elements, indicating the
  * direction of the shift from their true pitched values because of printing
  * difficulty.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type UpDownStopContinueValue = string
 
@@ -20921,6 +21877,8 @@ export type UpDownStopContinueValue = string
  *
  * The upright-inverted type describes the appearance of a fermata element. The
  * value is upright if not specified.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type UprightInvertedValue = string
 
@@ -20930,6 +21888,8 @@ export type UprightInvertedValue = string
  *
  * The valign type is used to indicate vertical alignment to the top, middle,
  * bottom, or baseline of the text. Defaults are implementation-dependent.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type ValignValue = string
 
@@ -20940,6 +21900,8 @@ export type ValignValue = string
  * The valign-image type is used to indicate vertical alignment for images and
  * graphics, so it does not include a baseline value. Defaults are
  * implementation-dependent.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type ValignImageValue = string
 
@@ -20948,6 +21910,8 @@ export type ValignImageValue = string
  * https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/wedge-type
  *
  * The wedge-type type is used to specify &lt;wedge&gt; types.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type WedgeTypeValue = string
 
@@ -20959,6 +21923,8 @@ export type WedgeTypeValue = string
  * appear above and below the barline. The straight and curved values represent
  * single wings, while the double-straight and double-curved values represent
  * double wings. The none value indicates no wings and is the default.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type WingedValue = string
 
@@ -20969,6 +21935,8 @@ export type WingedValue = string
  * The wood-value type represents pictograms for wood percussion instruments. The
  * maraca and maracas values distinguish the one- and two-maraca versions of the
  * pictogram.
+ *
+ * Base type: <a href="../xsd-string/index.html">string</a>
  */
 export type WoodValueValue = string
 
@@ -20978,6 +21946,8 @@ export type WoodValueValue = string
  *
  * See the <a href="https://www.w3.org/TR/xlink11/#link-behaviors">definition in
  * the XML Linking Language recommendation</a>.
+ *
+ * Base type: <a href="../xsd-NMTOKEN/index.html">NMTOKEN</a>
  */
 export type XlinkActuateValue = string
 
@@ -20987,6 +21957,8 @@ export type XlinkActuateValue = string
  *
  * See the <a href="https://www.w3.org/TR/xlink11/#link-behaviors">definition in
  * the XML Linking Language recommendation</a>.
+ *
+ * Base type: <a href="../xsd-NMTOKEN/index.html">NMTOKEN</a>
  */
 export type XlinkShowValue = string
 
@@ -20996,6 +21968,8 @@ export type XlinkShowValue = string
  *
  * See the <a href="https://www.w3.org/TR/xlink11/#link-types">definition in the
  * XML Linking Language recommendation</a>. MusicXML only supports the simple type.
+ *
+ * Base type: <a href="../xsd-NMTOKEN/index.html">NMTOKEN</a>
  */
 export type XlinkTypeValue = string
 
@@ -21024,6 +21998,8 @@ export type XmlSpaceValue = string
  *
  * The yes-no type is used for boolean-like attributes. We cannot use W3C XML
  * Schema booleans due to their restrictions on expression of boolean values.
+ *
+ * Base type: <a href="../xsd-token/index.html">token</a>
  */
 export type YesNoValue = string
 
@@ -21043,5 +22019,9 @@ export type YesNoNumberValue = string
  * Calendar dates are represented yyyy-mm-dd format, following <a
  * href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a>. This
  * is a W3C XML Schema date type, but without the optional timezone data.
+ *
+ * Base type: <a href="../xsd-date/index.html">date</a>
+ *
+ * Regex pattern: <b>[^:Z]*</b>
  */
 export type YyyyMmDdValue = string
